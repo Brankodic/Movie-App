@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-const template = React.createElement("h1", null, "Movie App");
+const App = () => {
+  return <h1>Movie App</h1>;
+};
 
-ReactDom.render(template, document.getElementById("root"));
+ReactDom.render(<App />, document.getElementById("root"));
