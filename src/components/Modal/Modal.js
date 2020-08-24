@@ -1,7 +1,7 @@
 import React from 'react';
 import Backdrop from './Backdrop/Backdrop'
 
-const modal = () => {
+const Modal = () => {
     return (
         <div>
             <p>Modal</p>
@@ -10,4 +10,4 @@ const modal = () => {
     );
 };
 
-export default modal;
+export default Modal;

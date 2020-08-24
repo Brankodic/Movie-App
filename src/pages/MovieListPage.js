@@ -9,7 +9,7 @@ import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton"
 import RouletteButton from "../components/Buttons/RouletteButton/RouletteButton";
 
 const useStyles = createUseStyles({
-  Movies: {
+  movies: {
     display: "grid",
     gridTemplateColumns: "auto auto auto",
     gridGap: "4rem",
@@ -25,7 +25,7 @@ const MovieListPage = () => {
   return (
     <>
       <Header />
-      <div className={classes.Movies}>
+      <div className={classes.movies}>
         <MovieCards />
       </div>
       <Modal />

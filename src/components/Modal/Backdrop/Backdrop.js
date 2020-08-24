@@ -1,6 +1,6 @@
 import React from 'react';
 
-const backdrop = () => {
+const Backdrop = () => {
     return (
         <div>
             Backdrop
@@ -8,4 +8,4 @@ const backdrop = () => {
     );
 };
 
-export default backdrop;
+export default Backdrop;

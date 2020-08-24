@@ -1,8 +1,9 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
+const ROULETTE_BUTTON_TEXT="Roulette"
 const useStyles = createUseStyles({
-  Roulette: {
+  roulette: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
     fontSize: 12,
     position: "fixed",
@@ -24,11 +25,14 @@ const useStyles = createUseStyles({
       boxShadow: "4px 4px 5px rgba(0, 0, 0, 0.6)",
       cursor: "pointer",
     },
+    "&:focus": {
+      outline: "none",
+    },
   },
 });
-const rouletteButton = () => {
+const RouletteButton = () => {
   const classes = useStyles();
-  return <button className={classes.Roulette}>Roullete</button>;
+return <button className={classes.roulette}>{ROULETTE_BUTTON_TEXT}</button>;
 };
 
-export default rouletteButton;
+export default RouletteButton;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const starRatingButton = () => {
+const StarRatingButton = () => {
   return (
     <>
       <button>Star</button>
@@ -12,4 +12,4 @@ const starRatingButton = () => {
   );
 };
 
-export default starRatingButton;
+export default StarRatingButton;

@@ -1,8 +1,11 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
+const MOVIE_APP_TEXT = "Movie App";
+const POPCORN_IMAGE_LINK =
+  "https://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/1024/PopcornTime-icon.png";
 const useStyles = createUseStyles({
-  Header: {
+  header: {
     fontFamily: " 'Luckiest Guy', cursive",
     textShadow: "2px 2px 1px #A62300",
     textAlign: "center",
@@ -17,7 +20,7 @@ const useStyles = createUseStyles({
     fontSize: 30,
     letterSpacing: 30,
   },
-  Img: {
+  img: {
     position: "absolute",
     zIndex: 101,
     top: 10,
@@ -29,18 +32,18 @@ const useStyles = createUseStyles({
   },
 });
 
-const header = () => {
+const Header = () => {
   const classes = useStyles();
   return (
     <div>
       <img
-        className={classes.Img}
+        className={classes.img}
         alt="Icon-popcorn"
-        src="https://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/1024/PopcornTime-icon.png"
+        src={POPCORN_IMAGE_LINK}
       ></img>
-      <header className={classes.Header}>Movie App</header>
+      <header className={classes.header}>{MOVIE_APP_TEXT}</header>
     </div>
   );
 };
 
-export default header;
+export default Header;

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const backButton = () => {
+const BACK_BUTTON_TEXT = "Back";
+const BackButton = () => {
     return (
-        <button>Back  Button</button>
+        <button>{BACK_BUTTON_TEXT}</button>
     );
 };
 
-export default backButton;
+export default BackButton;

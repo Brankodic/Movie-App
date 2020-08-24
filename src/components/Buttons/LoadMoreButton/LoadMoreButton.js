@@ -1,8 +1,9 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
+const LOAD_BUTTON_TEXT="Load More"
 const useStyles = createUseStyles({
-  Load: {
+  load: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
     position: "fixed",
     border: "3px solid rgb(255, 255, 255)",
@@ -23,11 +24,14 @@ const useStyles = createUseStyles({
       boxShadow: "4px 4px 5px rgba(0, 0, 0, 0.6)",
       cursor: "pointer",
     },
+    "&:focus": {
+        outline: "none",
+      },
   },
 });
-const loadMoreButton = () => {
+const LoadMoreButton = () => {
   const classes = useStyles();
-  return <button className={classes.Load}>Load More</button>;
+return <button className={classes.load}>{LOAD_BUTTON_TEXT}</button>;
 };
 
-export default loadMoreButton;
+export default LoadMoreButton;
