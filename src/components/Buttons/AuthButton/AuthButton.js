@@ -3,7 +3,7 @@ import {createUseStyles} from "react-jss"
 
 const useStyles = createUseStyles({
     Auth : {
-        fontFamily: '"Quattrocento Sans", sans-serif',
+        fontFamily: '"Alegreya Sans SC", sans-serif',
         position: 'fixed',
         border: '3px solid rgb(255, 255, 255)',
         left: '5%',

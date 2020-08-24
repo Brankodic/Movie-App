@@ -6,7 +6,8 @@ import MovieCards from "../components/MovieCards/MovieCards";
 import Modal from "../components/Modal/Modal";
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
-import RandomMovieButton from "../components/Buttons/RandomMovieButton/RandomMovieButton";
+import RouletteButton from "../components/Buttons/RouletteButton/RouletteButton";
+
 const useStyles = createUseStyles({
   Movies: {
     display: "grid",
@@ -30,7 +31,7 @@ const MovieListPage = () => {
       <Modal />
       <AuthButton />
       <LoadMoreButton />
-      <RandomMovieButton />
+      <RouletteButton />
     </>
   );
 };

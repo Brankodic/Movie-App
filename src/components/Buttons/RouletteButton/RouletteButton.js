@@ -2,11 +2,12 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-  Load: {
+  Roulette: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
+    fontSize: 12,
     position: "fixed",
     border: "3px solid rgb(255, 255, 255)",
-    left: "48%",
+    right: "5%",
     bottom: "2%",
     height: 60,
     width: 60,
@@ -25,9 +26,9 @@ const useStyles = createUseStyles({
     },
   },
 });
-const loadMoreButton = () => {
+const rouletteButton = () => {
   const classes = useStyles();
-  return <button className={classes.Load}>Load More</button>;
+  return <button className={classes.Roulette}>Roullete</button>;
 };
 
-export default loadMoreButton;
+export default rouletteButton;
