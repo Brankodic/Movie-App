@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
   Header: {
     fontFamily: " 'Luckiest Guy', cursive",
-    textShadow: "2px 2px 1px darkred",
+    textShadow: "2px 2px 1px #A62300",
     textAlign: "center",
     width: "100%",
     padding: 15,

@@ -24,10 +24,10 @@ const MovieListPage = () => {
   return (
     <>
       <Header />
-      <Modal />
       <div className={classes.Movies}>
         <MovieCards />
       </div>
+      <Modal />
       <AuthButton />
       <LoadMoreButton />
       <RandomMovieButton />

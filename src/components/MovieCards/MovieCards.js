@@ -12,7 +12,7 @@ const useStyles = createUseStyles({
         boxShadow: '2px 2px 3px rgba(0, 0, 0, 0.6)',
         borderBottomRightRadius: 50,
         justifyContent: 'center',
-        backgroundImage: 'linear-gradient( 135deg,rgba(197, 230, 240),rgba(30, 136, 168))',
+        background: "linear-gradient(to top left, #006064  0%, #5DC8CD 100%)",
         transition: '1s',
         '&:hover': {
         transition:'1s',
@@ -42,7 +42,7 @@ const useStyles = createUseStyles({
         left:'94%' ,
         bottom: '83%',
         border: '3px solid rgb(255, 255, 255)',
-        background: 'linear-gradient(135deg, rgb(221, 147, 97), rgb(253, 0, 0))',
+        background: 'linear-gradient(135deg, #FF3500, #A62300)',
       },
       Title :{
         color: 'white',
