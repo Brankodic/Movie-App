@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDom from "react-dom";
+import MovieListPage from "./pages/MovieListPage";
 
 const App = () => {
-  return <h1>Movie App</h1>;
+  return <MovieListPage />;
 };
 
 ReactDom.render(<App />, document.getElementById("root"));
