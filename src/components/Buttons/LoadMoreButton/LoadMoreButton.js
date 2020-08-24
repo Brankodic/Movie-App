@@ -2,6 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 
 const LOAD_BUTTON_TEXT="Load More"
+
 const useStyles = createUseStyles({
   load: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
@@ -29,6 +30,7 @@ const useStyles = createUseStyles({
       },
   },
 });
+
 const LoadMoreButton = () => {
   const classes = useStyles();
 return <button className={classes.load}>{LOAD_BUTTON_TEXT}</button>;

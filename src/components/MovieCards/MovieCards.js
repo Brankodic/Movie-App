@@ -53,7 +53,6 @@ const useStyles = createUseStyles({
     position: "relative",
     bottom: "30%",
   },
-
   year: {
     color: "rgb(255, 250, 250)",
     textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",

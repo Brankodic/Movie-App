@@ -1,7 +1,8 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const ROULETTE_BUTTON_TEXT="Roulette"
+const ROULETTE_BUTTON_TEXT = "Roulette";
+
 const useStyles = createUseStyles({
   roulette: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
@@ -30,9 +31,16 @@ const useStyles = createUseStyles({
     },
   },
 });
-const RouletteButton = () => {
+
+const RouletteButton = (props) => {
+  const { openModal } = props;
   const classes = useStyles();
-return <button className={classes.roulette}>{ROULETTE_BUTTON_TEXT}</button>;
+
+  return (
+    <button className={classes.roulette} onClick={() => openModal()}>
+      {ROULETTE_BUTTON_TEXT}
+    </button>
+  );
 };
 
 export default RouletteButton;

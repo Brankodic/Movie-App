@@ -6,7 +6,6 @@ import MovieCards from "../components/MovieCards/MovieCards";
 import Modal from "../components/Modal/Modal";
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
-import RouletteButton from "../components/Buttons/RouletteButton/RouletteButton";
 
 const useStyles = createUseStyles({
   movies: {
@@ -31,7 +30,6 @@ const MovieListPage = () => {
       <Modal />
       <AuthButton />
       <LoadMoreButton />
-      <RouletteButton />
     </>
   );
 };

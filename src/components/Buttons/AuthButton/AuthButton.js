@@ -2,6 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 
 const AUTH_BUTTON_TEXT = "Log In";
+
 const useStyles = createUseStyles({
   auth: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
@@ -29,6 +30,7 @@ const useStyles = createUseStyles({
     },
   },
 });
+
 const AuthButton = () => {
   const classes = useStyles();
   return <button className={classes.auth}>{AUTH_BUTTON_TEXT}</button>;
