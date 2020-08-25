@@ -1,7 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-import Header from "../components/Header/Header";
 import MovieCards from "../components/MovieCards/MovieCards";
 import Modal from "../components/Modal/Modal";
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
@@ -25,7 +24,6 @@ const MovieListPage = () => {
 
   return (
     <>
-      <Header />
       <div className={classes.movies}>
         <MovieCards />
       </div>

@@ -1,18 +1,20 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Redirect } from "react-router-dom";
 
+import Header from "./components/Header/Header";
 import MovieListPage from "./pages/MovieListPage";
-import SingleMoviePage from "./pages/SingleMoviePage"
+import SingleMoviePage from "./pages/SingleMoviePage";
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Route exact path="/">
-        <MovieListPage />{" "}
+        <MovieListPage />
       </Route>
-      <Route exact path="/movie5555">
-        <SingleMoviePage/>
+      <Route path="/movie5555">
+        <SingleMoviePage />
       </Route>
     </Router>
   );
