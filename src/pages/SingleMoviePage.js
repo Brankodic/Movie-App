@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 
+import BackButton from "../components/Buttons/BackButton/BackButton";
+
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -89,24 +91,27 @@ const SingleMoviePage = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.div} key={movie.id}>
-      <img className={classes.image} src={movie.image} alt="Movie Poster" />
-      <p className={classes.overview}>{movie.overview}</p>
-      <div className={classes.text}>
-        <p>
-          <strong>{text[0]}</strong>
-          {movie.rating}
-        </p>
-        <p>
-          <strong>{text[1]}</strong>
-          {movie.popularity}
-        </p>
-        <p>
-          <strong>{text[2]}</strong>
-          {movie.language}
-        </p>
+    <>
+      <div className={classes.div} key={movie.id}>
+        <img className={classes.image} src={movie.image} alt="Movie Poster" />
+        <p className={classes.overview}>{movie.overview}</p>
+        <div className={classes.text}>
+          <p>
+            <strong>{text[0]}</strong>
+            {movie.rating}
+          </p>
+          <p>
+            <strong>{text[1]}</strong>
+            {movie.popularity}
+          </p>
+          <p>
+            <strong>{text[2]}</strong>
+            {movie.language}
+          </p>
+        </div>
       </div>
-    </div>
+      <BackButton />
+    </>
   );
 };
 

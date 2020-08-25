@@ -3,7 +3,6 @@ import { createUseStyles } from "react-jss";
 
 import MovieCards from "../components/MovieCards/MovieCards";
 import Modal from "../components/Modal/Modal";
-import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
 
 const useStyles = createUseStyles({
@@ -28,7 +27,6 @@ const MovieListPage = () => {
         <MovieCards />
       </div>
       <Modal />
-      <AuthButton />
       <LoadMoreButton />
     </>
   );
