@@ -4,6 +4,8 @@ import { FaDiceD20 } from "react-icons/fa";
 
 import RouletteInput from "./RouletteInput/RouletteInput";
 
+const ROULETTE_TEXT = "Movie roulette : ";
+
 const useStyles = createUseStyles({
   h3: {
     color: "white",
@@ -29,7 +31,7 @@ const MovieRoulette = () => {
 
   return (
     <div className={classes.div}>
-      <h3 className={classes.h3}>Movie Roulette:</h3>
+      <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
       <RouletteInput />
       <FaDiceD20 className={classes.button} />
     </div>

@@ -26,7 +26,7 @@ const useStyles = createUseStyles({
     boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.5)",
   },
   overview: {
-    animation: "glowing 5000ms infinite",
+    animation: "$glowing 5000ms infinite",
     transition: "0.5s",
     backgroundColor: "rgba(170, 170, 170, 0.5)",
     textAlign: "left",
@@ -52,7 +52,7 @@ const useStyles = createUseStyles({
     },
   },
   text: {
-    animation: " glowing 5000ms infinite",
+    animation: "$glowing 5000ms infinite",
     transition: "0.5s",
     backgroundColor: "rgba(170, 170, 170, 0.5)",
     color: "rgba(0, 0, 0, 0)",
@@ -72,6 +72,20 @@ const useStyles = createUseStyles({
       width: "92%",
     },
   },
+  '@keyframes glowing' : {
+    '0%': {
+      boxShadow: '0 0 -10px #64acbe',
+    },
+    '40%': {
+      boxShadow: '0 0 20px #00aeff',
+    },
+    '60%' :{
+      boxShadow: '0 0 20px #ff0000',
+    },
+    '100%' :{
+      boxShadow: '0 0 -10px #64acbe',
+    },
+  }
 });
 
 const SingleMoviePage = () => {
@@ -87,7 +101,6 @@ const SingleMoviePage = () => {
       "https://i1.wp.com/image.tmdb.org/t/p/w500/b4thKm1P0F1SYeL11uyVAlGhzR6.jpg",
   });
 
-  const text = SINGLE_MOVIE_TEXT;
   const classes = useStyles();
 
   return (
@@ -97,15 +110,15 @@ const SingleMoviePage = () => {
         <p className={classes.overview}>{movie.overview}</p>
         <div className={classes.text}>
           <p>
-            <strong>{text[0]}</strong>
+            <strong>{SINGLE_MOVIE_TEXT[0]}</strong>
             {movie.rating}
           </p>
           <p>
-            <strong>{text[1]}</strong>
+            <strong>{SINGLE_MOVIE_TEXT[1]}</strong>
             {movie.popularity}
           </p>
           <p>
-            <strong>{text[2]}</strong>
+            <strong>{SINGLE_MOVIE_TEXT[2]}</strong>
             {movie.language}
           </p>
         </div>

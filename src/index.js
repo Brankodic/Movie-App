@@ -18,6 +18,7 @@ const App = () => {
         <SingleMoviePage />
       </Route>
       <AuthButton />
+      <Redirect to="/" />
     </Router>
   );
 };
