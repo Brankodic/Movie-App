@@ -1,14 +1,15 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const AUTH_BUTTON_TEXT = "Log In";
+const ROULETTE_BUTTON_TEXT = "Roulette";
 
 const useStyles = createUseStyles({
-  auth: {
+  roulette: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
+    fontSize: 12,
     position: "fixed",
     border: "3px solid rgb(255, 255, 255)",
-    left: "5%",
+    right: "5%",
     bottom: "2%",
     height: 60,
     width: 60,
@@ -31,9 +32,15 @@ const useStyles = createUseStyles({
   },
 });
 
-const AuthButton = () => {
+const RouletteButton = (props) => {
+  const { openModal } = props;
   const classes = useStyles();
-  return <button className={classes.auth}>{AUTH_BUTTON_TEXT}</button>;
+
+  return (
+    <button className={classes.roulette} onClick={() => openModal()}>
+      {ROULETTE_BUTTON_TEXT}
+    </button>
+  );
 };
 
-export default AuthButton;
+export default RouletteButton;
