@@ -1,10 +1,8 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-import Header from "../components/Header/Header";
 import MovieCards from "../components/MovieCards/MovieCards";
 import Modal from "../components/Modal/Modal";
-import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
 
 const useStyles = createUseStyles({
@@ -25,12 +23,10 @@ const MovieListPage = () => {
 
   return (
     <>
-      <Header />
       <div className={classes.movies}>
         <MovieCards />
       </div>
       <Modal />
-      <AuthButton />
       <LoadMoreButton />
     </>
   );
