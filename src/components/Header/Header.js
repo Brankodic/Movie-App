@@ -35,6 +35,7 @@ const useStyles = createUseStyles({
 
 const Header = () => {
   const classes = useStyles();
+  
   return (
     <div>
       <img

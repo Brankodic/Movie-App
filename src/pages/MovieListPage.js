@@ -1,6 +1,5 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from "../components/Header/Header";
 import MovieCards from "../components/MovieCards/MovieCards";
@@ -20,20 +19,20 @@ const useStyles = createUseStyles({
     marginTop: "4em",
   },
 });
+
 const MovieListPage = () => {
   const classes = useStyles();
+
   return (
-    <Router>
-      <Route exact path="/">
-        <Header />
-        <div className={classes.movies}>
-          <MovieCards />
-        </div>
-        <Modal />
-        <AuthButton />
-        <LoadMoreButton />
-      </Route>
-    </Router>
+    <>
+      <Header />
+      <div className={classes.movies}>
+        <MovieCards />
+      </div>
+      <Modal />
+      <AuthButton />
+      <LoadMoreButton />
+    </>
   );
 };
 

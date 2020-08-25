@@ -1,5 +1,7 @@
-import React from "react";
+import React,{ useState } from "react";
+import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
+
 
 const useStyles = createUseStyles({
   movie: {
@@ -75,30 +77,41 @@ const useStyles = createUseStyles({
     position: "relative",
     bottom: "35%",
   },
+  link:{
+    textDecoration: "none",
+  }
 });
 
 const MovieCards = () => {
+  const [movie, setMovie] = useState({
+    id: 5555,
+    name: "Super Movie",
+    rating: 9.9,
+    year: 2019,
+    language: "English",
+    image:
+      "https://image.shutterstock.com/image-photo/photo-old-movie-projector-260nw-92369284.jpg",
+  });
   const classes = useStyles();
+
   return (
-    <div className={classes.movie}>
-      <img
-        className={classes.img}
-        src="https://image.shutterstock.com/image-photo/photo-old-movie-projector-260nw-92369284.jpg"
-        alt="movie"
-      />
+    <Link className={classes.link} to={`/movie${movie.id}`}>
+    <div id={movie.id} className={classes.movie}>
+      <img className={classes.img} src={movie.image} alt="movie" />
       <p className={classes.rating}>
-        <strong>9.9</strong>
+        <strong>{movie.rating}</strong>
       </p>
       <p className={classes.title}>
-        <strong>Super Movie</strong>
+        <strong>{movie.name}</strong>
       </p>
       <p className={classes.year}>
-        <i>2019</i>
+        <i>{movie.year}</i>
       </p>
       <p className={classes.language}>
-        <i>Language : English</i>
+        <i>{movie.language}</i>
       </p>
     </div>
+    </Link>
   );
 };
 
