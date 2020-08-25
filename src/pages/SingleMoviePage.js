@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 
 import BackButton from "../components/Buttons/BackButton/BackButton";
+import StarRating from "../components/Buttons/StarRating/StarRating"
 
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
@@ -124,6 +125,7 @@ const SingleMoviePage = () => {
         </div>
       </div>
       <BackButton />
+      <StarRating />
     </>
   );
 };
