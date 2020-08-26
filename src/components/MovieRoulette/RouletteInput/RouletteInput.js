@@ -20,7 +20,7 @@ const RoulleteRadioInput = () => {
   const classes = useStyles();
 
   return GENRE_VALUE.map((genre) => (
-    <div>
+    <div key={genre}>
       <label className={classes.label}>
         <input
           className={classes.input}

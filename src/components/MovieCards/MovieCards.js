@@ -1,7 +1,9 @@
-import React,{ useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 
+const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+const LANGUAGE_TEXT = "Language : ";
 
 const useStyles = createUseStyles({
   movie: {
@@ -77,40 +79,38 @@ const useStyles = createUseStyles({
     position: "relative",
     bottom: "35%",
   },
-  link:{
+  link: {
     textDecoration: "none",
-  }
+  },
 });
 
-const MovieCards = () => {
-  const [movie, setMovie] = useState({
-    id: 5555,
-    name: "Super Movie",
-    rating: 9.9,
-    year: 2019,
-    language: "English",
-    image:
-      "https://image.shutterstock.com/image-photo/photo-old-movie-projector-260nw-92369284.jpg",
-  });
+const MovieCards = ({ movie }) => {
   const classes = useStyles();
 
   return (
     <Link className={classes.link} to={`/movie${movie.id}`}>
-    <div id={movie.id} className={classes.movie}>
-      <img className={classes.img} src={movie.image} alt="movie" />
-      <p className={classes.rating}>
-        <strong>{movie.rating}</strong>
-      </p>
-      <p className={classes.title}>
-        <strong>{movie.name}</strong>
-      </p>
-      <p className={classes.year}>
-        <i>{movie.year}</i>
-      </p>
-      <p className={classes.language}>
-        <i>{movie.language}</i>
-      </p>
-    </div>
+      <div key={movie.id} className={classes.movie}>
+        <img
+          className={classes.img}
+          src={IMAGE_PATH + movie.poster_path}
+          alt="movie"
+        />
+        <p className={classes.rating}>
+          <strong>{String(movie.vote_average)}</strong>
+        </p>
+        <p className={classes.title}>
+          <strong>{movie.title}</strong>
+        </p>
+        <p className={classes.year}>
+          <i>({movie.release_date.slice(0, 4)})</i>
+        </p>
+        <p className={classes.language}>
+          <i>
+            {LANGUAGE_TEXT}
+            {movie.original_language}
+          </i>
+        </p>
+      </div>
     </Link>
   );
 };
