@@ -21,42 +21,76 @@ const useStyles = createUseStyles({
 });
 
 const MovieListPage = () => {
-  
-  const [movieList, setMovies] = useState({
+  const [movieListState, setState] = useState({
+    apiMoviesPage: 2,
+    loadMoreCounter: 1,
+    movieSliceValue: 6,
     moviesArray: [],
   });
 
   const classes = useStyles();
 
   async function fetchMovies() {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
-    );
-    res
-      .json()
-      .then((res) => {
-        setMovies({
-          ...movieList,
-          moviesArray: res.results,
-        });
-      })
-      .catch((err) => consoleLog(err));
+    if (movieListState.loadMoreCounter < 2) {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+      );
+      res
+        .json()
+        .then((res) => {
+          setState({
+            ...movieListState,
+            moviesArray: res.results,
+          });
+        })
+        .catch((err) => consoleLog(err));
+    }
   }
 
   useEffect(() => {
     fetchMovies();
   }, []);
 
+  const handleLoadMore = () => {
+    if (movieListState.loadMoreCounter % 3 == 0) {
+      async function fetchMoreMovies() {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${movieListState.apiMoviesPage}`
+        );
+        res
+          .json()
+          .then((res) => {
+            setState({
+              ...movieListState,
+              moviesArray: movieListState.moviesArray.concat(res.results),
+              apiMoviesPage: movieListState.apiMoviesPage + 1,
+              loadMoreCounter: movieListState.loadMoreCounter + 1,
+              movieSliceValue: movieListState.movieSliceValue + 6,
+            });
+          })
+          .catch((err) => consoleLog(err));
+      }
+      fetchMoreMovies();
+    }
+    setState({
+      ...movieListState,
+      loadMoreCounter: movieListState.loadMoreCounter + 1,
+      movieSliceValue: movieListState.movieSliceValue + 6,
+    });
+  };
+
   return (
     <>
       <div className={classes.movies}>
-        {movieList.moviesArray.slice(0,6).map( movie => (
-          <MovieCards key={movie.id} movie={movie} />
-        ))}
+        {movieListState.moviesArray
+          .slice(0, movieListState.movieSliceValue)
+          .map((movie) => (
+            <MovieCards key={movie.id} movie={movie} />
+          ))}
         ;
       </div>
       <Modal />
-      <LoadMoreButton />
+      <LoadMoreButton load={handleLoadMore} />
     </>
   );
 };
