@@ -43,7 +43,7 @@ const MovieListPage = () => {
             moviesArray: res.results,
           });
         })
-        .catch((err) => consoleLog(err));
+        .catch((err) => console.log(err));
     }
   }
 
