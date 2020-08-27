@@ -3,7 +3,7 @@ import { createUseStyles } from "react-jss";
 
 const GENRE_VALUE = {
   genreNames: ["comedy", "action", "thriller", "horror", "fantasy", "romance"],
-  genreId:[35,28,53,27,14,10749]
+  genreId: [35, 28, 53, 27, 14, 10749],
 };
 const useStyles = createUseStyles({
   input: {
@@ -12,11 +12,11 @@ const useStyles = createUseStyles({
   },
 });
 
-const RoulleteRadioInput = (props) => {
+const RouletteInput = (props) => {
   const handleGenre = props.handleGenre;
   const classes = useStyles();
 
-  return GENRE_VALUE.genreNames.map((genre,i) => (
+  return GENRE_VALUE.genreNames.map((genre, i) => (
     <div key={genre}>
       <label className={classes.label}>
         <input
@@ -33,4 +33,4 @@ const RoulleteRadioInput = (props) => {
   ));
 };
 
-export default RoulleteRadioInput;
+export default RouletteInput;

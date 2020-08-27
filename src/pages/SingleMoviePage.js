@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
+import { useLocation } from "react-router-dom";
 
 import BackButton from "../components/Buttons/BackButton/BackButton";
-import StarRating from "../components/Buttons/StarRating/StarRating"
+import StarRating from "../components/Buttons/StarRating/StarRating";
 
+const API_KEY = process.env.API_KEY;
+const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -62,57 +65,68 @@ const useStyles = createUseStyles({
     fontSize: 1,
     top: "76%",
     width: 20,
-    height: 130,
+    height: 140,
     padding: 20,
     "&:hover": {
       transition: "0.3s",
       backgroundColor: "rgba(0, 0, 0, 0.5)",
       color: "white",
       fontSize: "1rem",
-      height: "18.3%",
       width: "92%",
     },
   },
-  '@keyframes glowing' : {
-    '0%': {
-      boxShadow: '0 0 -10px #64acbe',
+  "@keyframes glowing": {
+    "0%": {
+      boxShadow: "0 0 -10px #64acbe",
     },
-    '40%': {
-      boxShadow: '0 0 20px #00aeff',
+    "40%": {
+      boxShadow: "0 0 20px #00aeff",
     },
-    '60%' :{
-      boxShadow: '0 0 20px #ff0000',
+    "60%": {
+      boxShadow: "0 0 20px #ff0000",
     },
-    '100%' :{
-      boxShadow: '0 0 -10px #64acbe',
+    "100%": {
+      boxShadow: "0 0 -10px #64acbe",
     },
-  }
+  },
 });
 
 const SingleMoviePage = () => {
-  const [movie, setMovie] = useState({
-    id: 5555,
-    name: "Super Movie",
-    rating: 9.9,
-    year: 2019,
-    language: "English",
-    overview: "Blablablablablablablablablabla",
-    popularity: 9000,
-    image:
-      "https://i1.wp.com/image.tmdb.org/t/p/w500/b4thKm1P0F1SYeL11uyVAlGhzR6.jpg",
-  });
+  const [state, setState] = useState({ movie: {}, image: "" });
 
+  const movie = state.movie;
+  const image = state.image;
   const classes = useStyles();
+  const movieUrl = useLocation();
+
+  useEffect(() => {
+    async function fetchMovie() {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieUrl.pathname.slice(19)}?api_key=${API_KEY}&language=en-US`
+      );
+      res
+        .json()
+        .then((res) => {
+          setState({
+            ...state,
+            movie: res,
+            image: IMAGE_PATH + res.poster_path,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+    fetchMovie();
+  }, [movieUrl]);
 
   return (
     <>
       <div className={classes.div} key={movie.id}>
-        <img className={classes.image} src={movie.image} alt="Movie Poster" />
+        <img className={classes.image} src={image} alt="Movie Poster" />
         <p className={classes.overview}>{movie.overview}</p>
         <div className={classes.text}>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[0]}</strong>
-            {movie.rating}
+            {movie.vote_average}
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[1]}</strong>
@@ -120,7 +134,7 @@ const SingleMoviePage = () => {
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[2]}</strong>
-            {movie.language}
+            {movie.original_language}
           </p>
         </div>
       </div>
