@@ -14,7 +14,7 @@ const App = () => {
       <Route exact path="/">
         <MovieListPage />
       </Route>
-      <Route path="/movie5555">
+      <Route path="/single-movie-page">
         <SingleMoviePage />
       </Route>
       <AuthButton />

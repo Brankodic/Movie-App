@@ -57,7 +57,7 @@ const MovieRoulette = () => {
 
   const handleReroute = (id) => {
     if (roulette.genre === 0) {
-      alert("Pls choose a genre.");
+      alert("Please choose a genre.");
     }
   };
 
@@ -70,7 +70,7 @@ const MovieRoulette = () => {
       <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
       <RouletteInput handleGenre={handleGenre} genre={roulette.genre} />
       {roulette.movieId > 0 ? (
-        <Link to={`/movie${roulette.movieId}`}>
+        <Link to={`/single-movie-page/${roulette.movieId}`}>
           <FaDiceD20
             onClick={() => handleReroute(roulette.genre)}
             className={classes.button}

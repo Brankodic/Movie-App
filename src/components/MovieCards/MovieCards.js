@@ -88,7 +88,7 @@ const MovieCards = ({ movie }) => {
   const classes = useStyles();
 
   return (
-    <Link className={classes.link} to={`/movie${movie.id}`}>
+    <Link className={classes.link} to={`/single-movie-page/${movie.id}`}>
       <div key={movie.id} className={classes.movie}>
         <img
           className={classes.img}
