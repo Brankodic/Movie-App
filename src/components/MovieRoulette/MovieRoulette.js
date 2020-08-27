@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
 
@@ -27,13 +27,31 @@ const useStyles = createUseStyles({
 });
 
 const MovieRoulette = () => {
+  const [roulette, setState] = useState({
+    genre: 0,
+  });
+
   const classes = useStyles();
+
+  const handleReroute = (id) => {
+    if (roulette.genre === 0) {
+      alert("Pls choose a genre.");
+    }
+    // fetch request for a random movie
+  };
+
+  const handleGenre = (id) => {
+    setState({ ...roulette, genre: id });
+  };
 
   return (
     <div className={classes.div}>
       <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
-      <RouletteInput />
-      <FaDiceD20 className={classes.button} />
+      <RouletteInput handleGenre={handleGenre} genre={roulette.genre} />
+      <FaDiceD20
+        onClick={() => handleReroute(roulette.genre)}
+        className={classes.button}
+      />
     </div>
   );
 };
