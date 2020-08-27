@@ -31,9 +31,10 @@ const useStyles = createUseStyles({
   },
 });
 
-const LoadMoreButton = () => {
+const LoadMoreButton = (props) => {
+  const load = props.load;
   const classes = useStyles();
-return <button className={classes.load}>{LOAD_BUTTON_TEXT}</button>;
+return <button className={classes.load} onClick={load}>{LOAD_BUTTON_TEXT}</button>;
 };
 
 export default LoadMoreButton;
