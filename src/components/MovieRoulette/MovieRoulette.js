@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import RouletteInput from "./RouletteInput/RouletteInput";
 
 const API_KEY = process.env.API_KEY;
+const ALERT_MESSAGE = "Please choose a genre"
 const ROULETTE_TEXT = "Movie roulette : ";
 
 const useStyles = createUseStyles({
@@ -35,31 +36,36 @@ const MovieRoulette = () => {
   });
 
   const classes = useStyles();
+  const isMounted = useRef(false);
+  const abortController = new AbortController();
+  const signal = abortController.signal;
 
   useEffect(() => {
-    async function fetchRandomMovieId() {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${roulette.genre}`
-      );
-      res
-        .json()
-        .then((res) => {
-          const randomNum = Math.floor(Math.random() * 20);
-          setState({
-            ...roulette,
-            movieId: res.results[randomNum].id,
-          });
-        })
-        .catch((err) => console.log(err));
+    if (isMounted.current) {
+      async function fetchRandomMovieId() {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${roulette.genre}`,
+          { signal: signal }
+        );
+        res
+          .json()
+          .then((res) => {
+            const randomNum = Math.floor(Math.random() * 20);
+            setState({
+              ...roulette,
+              movieId: res.results[randomNum].id,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+      fetchRandomMovieId();
+    } else {
+      isMounted.current = true;
     }
-    fetchRandomMovieId();
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [roulette.genre]);
-
-  const handleReroute = (id) => {
-    if (roulette.genre === 0) {
-      alert("Please choose a genre.");
-    }
-  };
 
   const handleGenre = (id) => {
     setState({ ...roulette, genre: id });
@@ -72,13 +78,12 @@ const MovieRoulette = () => {
       {roulette.movieId > 0 ? (
         <Link to={`/single-movie-page/${roulette.movieId}`}>
           <FaDiceD20
-            onClick={() => handleReroute(roulette.genre)}
             className={classes.button}
           ></FaDiceD20>
         </Link>
       ) : (
         <FaDiceD20
-          onClick={() => handleReroute(roulette.genre)}
+          onClick={() => alert(ALERT_MESSAGE)}
           className={classes.button}
         />
       )}

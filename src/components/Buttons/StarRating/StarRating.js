@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
 import { createUseStyles } from "react-jss";
+import { FaStar } from "react-icons/fa";
 
 const USER_RATING_TEXT = "User Rating : ";
 
@@ -46,7 +46,7 @@ const StarRating = () => {
       <p>
         <strong>{USER_RATING_TEXT}</strong>
       </p>
-      {[...Array(10)].map((n, i) => {
+      {[...Array(10)].map((n,i) => {
         const ratingValue = i + 1;
         return (
           <label key={i}>
@@ -62,7 +62,7 @@ const StarRating = () => {
               color={
                 ratingValue <= (rating.ratingHover || rating.rate)
                   ? "#ff1a1a"
-                  : "#e4e5e9 "
+                  : "#e4e5e9"
               }
               size={20}
               onMouseEnter={() => handlerHover(ratingValue)}

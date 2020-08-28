@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 
-import MovieCards from "../components/MovieCards/MovieCards";
-import Modal from "../components/Modal/Modal";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
+import Modal from "../components/Modal/Modal";
+import MovieCards from "../components/MovieCards/MovieCards";
 
 const API_KEY = process.env.API_KEY;
 
@@ -29,11 +29,14 @@ const MovieListPage = () => {
   });
 
   const classes = useStyles();
+  const abortController = new AbortController();
+  const signal = abortController.signal;
 
   async function fetchMovies() {
     if (movieListState.loadMoreCounter < 2) {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+        { signal: signal }
       );
       res
         .json()
@@ -45,6 +48,9 @@ const MovieListPage = () => {
         })
         .catch((err) => console.log(err));
     }
+    return function cleanup() {
+      abortController.abort();
+    };
   }
 
   useEffect(() => {
@@ -55,7 +61,8 @@ const MovieListPage = () => {
     if (movieListState.loadMoreCounter % 3 == 0) {
       async function fetchMoreMovies() {
         const res = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${movieListState.apiMoviesPage}`
+          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${movieListState.apiMoviesPage}`,
+          { signal: signal }
         );
         res
           .json()
@@ -77,6 +84,9 @@ const MovieListPage = () => {
       loadMoreCounter: movieListState.loadMoreCounter + 1,
       movieSliceValue: movieListState.movieSliceValue + 6,
     });
+    return function cleanup() {
+      abortController.abort();
+    };
   };
 
   return (

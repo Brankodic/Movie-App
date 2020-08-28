@@ -98,11 +98,16 @@ const SingleMoviePage = () => {
   const image = state.image;
   const classes = useStyles();
   const movieUrl = useLocation();
+  const abortController = new AbortController();
+  const signal = abortController.signal;
 
   useEffect(() => {
     async function fetchMovie() {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieUrl.pathname.slice(19)}?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movieUrl.pathname.slice(
+          19
+        )}?api_key=${API_KEY}&language=en-US`,
+        { signal: signal }
       );
       res
         .json()
@@ -116,6 +121,9 @@ const SingleMoviePage = () => {
         .catch((err) => console.log(err));
     }
     fetchMovie();
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [movieUrl]);
 
   return (
