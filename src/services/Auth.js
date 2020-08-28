@@ -1,19 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
+import { store } from "./AuthContextProvider";
 
 const API_KEY = process.env.API_KEY;
 
 const Auth = () => {
   const [state, setState] = useState({
-    sessionId:Cookies.get("session_id") ,
-    token: Cookies.get("request_token") ,
+    sessionId: Cookies.get("session_id"),
+    token: Cookies.get("request_token"),
     loggedIn: undefined,
   });
 
+  const globalState = useContext(store);
+  const { dispatch } = globalState;
+
   useEffect(() => {
-    if (state.token !== undefined) {
+    if (state.sessionId === undefined) {
+      dispatch({ type: "log out" });
+      setState({ ...state, loggedIn: false });
+    } else {
+      dispatch({ type: "log in" });
+      setState({ ...state, loggedIn: true });
+    }
+  }, [state.sessionId]);
+
+  useEffect(() => {
+    if (state.token !== undefined && state.sessionId === undefined) {
       async function getSessId() {
         const res = await fetch(
           `https://api.themoviedb.org/3/authentication/session/new?api_key=${API_KEY}&request_token=${state.token}`,
@@ -23,23 +37,17 @@ const Auth = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            Cookies.set("session_id", `${data.session_id}`);
+            Cookies.set("session_id", data.session_id);
             setState({
               ...state,
-              sessionId: Cookies.get("session_id") ,
-              loggedIn: true,
+              sessionId: data.session_id,
             });
           })
           .catch((err) => console.log(err));
       }
       getSessId();
     }
-    if (state.sessionId === undefined) {
-      setState({ ...state, loggedIn: false });
-    } else {
-      setState({ ...state, loggedIn: true });
-    }
-  }, []);
+  }, [state.token]);
 
   const handleLogin = () => {
     async function fetchToken() {
@@ -62,9 +70,8 @@ const Auth = () => {
     Cookies.remove("request_token");
     setState({
       ...state,
-      sessionId:  undefined ,
-      token:  undefined ,
-      loggedIn: false,
+      sessionId: undefined,
+      token: undefined,
     });
   };
 
