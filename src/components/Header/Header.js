@@ -1,6 +1,7 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
+const IMAGE_ALT = "Icon-popcorn";
 const MOVIE_APP_TEXT = "Movie App";
 const POPCORN_IMAGE_LINK = "https://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/1024/PopcornTime-icon.png";
 
@@ -39,7 +40,7 @@ const Header = () => {
     <div>
       <img
         className={classes.img}
-        alt="Icon-popcorn"
+        alt={IMAGE_ALT}
         src={POPCORN_IMAGE_LINK}
       ></img>
       <header className={classes.header}>{MOVIE_APP_TEXT}</header>

@@ -2,8 +2,10 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
+const IMAGE_ALT = "movie"
 const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
 const LANGUAGE_TEXT = "Language : ";
+const SINGLE_MOVIE_URL = "/single-movie-page/"
 
 const useStyles = createUseStyles({
   movie: {
@@ -88,12 +90,12 @@ const MovieCards = ({ movie }) => {
   const classes = useStyles();
 
   return (
-    <Link className={classes.link} to={`/single-movie-page/${movie.id}`}>
+    <Link className={classes.link} to={`${SINGLE_MOVIE_URL}${movie.id}`}>
       <div key={movie.id} className={classes.movie}>
         <img
           className={classes.img}
           src={IMAGE_PATH + movie.poster_path}
-          alt="movie"
+          alt={IMAGE_ALT}
         />
         <p className={classes.rating}>
           <strong>{String(movie.vote_average)}</strong>

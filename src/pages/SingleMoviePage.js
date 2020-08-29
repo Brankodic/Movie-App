@@ -5,8 +5,10 @@ import { useLocation } from "react-router-dom";
 import BackButton from "../components/Buttons/BackButton/BackButton";
 import StarRating from "../components/Buttons/StarRating/StarRating";
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = `?api_key=${process.env.API_KEY}`;
+const IMAGE_ALT = "Movie Poster";
 const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+const GET_MOVIE_URL = `https://api.themoviedb.org/3/movie/`;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -92,22 +94,16 @@ const useStyles = createUseStyles({
 });
 
 const SingleMoviePage = () => {
-  const [state, setState] = useState({ movie: {}, image: "" });
+  const [state, setState] = useState({ movie: {}, image: undefined });
 
-  const movie = state.movie;
-  const image = state.image;
+  const { movie, image } = state;
   const classes = useStyles();
   const movieUrl = useLocation();
-  const abortController = new AbortController();
-  const signal = abortController.signal;
 
   useEffect(() => {
-    async function fetchMovie() {
+    async function getMovie() {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieUrl.pathname.slice(
-          19
-        )}?api_key=${API_KEY}&language=en-US`,
-        { signal: signal }
+        `${GET_MOVIE_URL}${movieUrl.pathname.slice(19)}${API_KEY}`
       );
       res
         .json()
@@ -120,16 +116,13 @@ const SingleMoviePage = () => {
         })
         .catch((err) => console.log(err));
     }
-    fetchMovie();
-    return function cleanup() {
-      abortController.abort();
-    };
+    getMovie();
   }, [movieUrl]);
 
   return (
     <>
       <div className={classes.div} key={movie.id}>
-        <img className={classes.image} src={image} alt="Movie Poster" />
+        <img className={classes.image} src={image} alt={IMAGE_ALT} />
         <p className={classes.overview}>{movie.overview}</p>
         <div className={classes.text}>
           <p>

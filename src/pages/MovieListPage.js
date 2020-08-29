@@ -6,6 +6,8 @@ import Modal from "../components/Modal/Modal";
 import MovieCards from "../components/MovieCards/MovieCards";
 
 const API_KEY = process.env.API_KEY;
+const GET_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+const GET_MORE_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=`;
 
 const useStyles = createUseStyles({
   movies: {
@@ -28,16 +30,22 @@ const MovieListPage = () => {
     moviesArray: [],
   });
 
-  const classes = useStyles();
-  const abortController = new AbortController();
-  const signal = abortController.signal;
+  const {
+    apiMoviesPage,
+    loadMoreCounter,
+    movieSliceValue,
+    moviesArray,
+  } = movieListState;
 
-  async function fetchMovies() {
-    if (movieListState.loadMoreCounter < 2) {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
-        { signal: signal }
-      );
+  const classes = useStyles();
+
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  async function getMovies() {
+    if (loadMoreCounter < 2) {
+      const res = await fetch(GET_MOVIES_URL);
       res
         .json()
         .then((res) => {
@@ -48,55 +56,40 @@ const MovieListPage = () => {
         })
         .catch((err) => console.log(err));
     }
-    return function cleanup() {
-      abortController.abort();
-    };
   }
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
   const handleLoadMore = () => {
-    if (movieListState.loadMoreCounter % 3 == 0) {
-      async function fetchMoreMovies() {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${movieListState.apiMoviesPage}`,
-          { signal: signal }
-        );
+    if (loadMoreCounter % 3 == 0) {
+      async function getMoreMovies() {
+        const res = await fetch(`${GET_MORE_MOVIES_URL}${apiMoviesPage}`);
         res
           .json()
           .then((res) => {
             setState({
               ...movieListState,
-              moviesArray: movieListState.moviesArray.concat(res.results),
-              apiMoviesPage: movieListState.apiMoviesPage + 1,
-              loadMoreCounter: movieListState.loadMoreCounter + 1,
-              movieSliceValue: movieListState.movieSliceValue + 6,
+              moviesArray: moviesArray.concat(res.results),
+              apiMoviesPage: apiMoviesPage + 1,
+              loadMoreCounter: loadMoreCounter + 1,
+              movieSliceValue: movieSliceValue + 6,
             });
           })
           .catch((err) => consoleLog(err));
       }
-      fetchMoreMovies();
+      getMoreMovies();
     }
     setState({
       ...movieListState,
-      loadMoreCounter: movieListState.loadMoreCounter + 1,
-      movieSliceValue: movieListState.movieSliceValue + 6,
+      loadMoreCounter: loadMoreCounter + 1,
+      movieSliceValue: movieSliceValue + 6,
     });
-    return function cleanup() {
-      abortController.abort();
-    };
   };
 
   return (
     <>
       <div className={classes.movies}>
-        {movieListState.moviesArray
-          .slice(0, movieListState.movieSliceValue)
-          .map((movie) => (
-            <MovieCards key={movie.id} movie={movie} />
-          ))}
+        {moviesArray.slice(0, movieSliceValue).map((movie) => (
+          <MovieCards key={movie.id} movie={movie} />
+        ))}
         ;
       </div>
       <Modal />

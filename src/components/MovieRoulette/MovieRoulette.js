@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 
 import RouletteInput from "./RouletteInput/RouletteInput";
 
+const ALERT_MESSAGE = "Please choose a genre";
 const API_KEY = process.env.API_KEY;
-const ALERT_MESSAGE = "Please choose a genre"
+const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`;
 const ROULETTE_TEXT = "Movie roulette : ";
+const SINGLE_MOVIE_URL = '/single-movie-page/';
 
 const useStyles = createUseStyles({
   h3: {
@@ -34,37 +36,29 @@ const MovieRoulette = () => {
     movieId: 0,
     genre: 0,
   });
-
+  
+  const { movieId, genre } = roulette;
   const classes = useStyles();
   const isMounted = useRef(false);
-  const abortController = new AbortController();
-  const signal = abortController.signal;
 
   useEffect(() => {
     if (isMounted.current) {
-      async function fetchRandomMovieId() {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${roulette.genre}`,
-          { signal: signal }
-        );
+      async function getRandomMovieId() {
+        const res = await fetch(`${GET_RANDOM_URL}${genre}`);
         res
           .json()
           .then((res) => {
-            const randomNum = Math.floor(Math.random() * 20);
             setState({
               ...roulette,
-              movieId: res.results[randomNum].id,
+              movieId: res.results[Math.floor(Math.random() * 20)].id,
             });
           })
           .catch((err) => console.log(err));
       }
-      fetchRandomMovieId();
+      getRandomMovieId();
     } else {
       isMounted.current = true;
     }
-    return function cleanup() {
-      abortController.abort();
-    };
   }, [roulette.genre]);
 
   const handleGenre = (id) => {
@@ -74,12 +68,10 @@ const MovieRoulette = () => {
   return (
     <div className={classes.div}>
       <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
-      <RouletteInput handleGenre={handleGenre} genre={roulette.genre} />
+      <RouletteInput handleGenre={handleGenre} genre={genre} />
       {roulette.movieId > 0 ? (
-        <Link to={`/single-movie-page/${roulette.movieId}`}>
-          <FaDiceD20
-            className={classes.button}
-          ></FaDiceD20>
+        <Link to={`${SINGLE_MOVIE_URL}${movieId}`}>
+          <FaDiceD20 className={classes.button}></FaDiceD20>
         </Link>
       ) : (
         <FaDiceD20
