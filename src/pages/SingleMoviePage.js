@@ -25,7 +25,7 @@ const useStyles = createUseStyles({
     textAlign: "center",
     top: 5,
     display: "block",
-    marginTop: 50,
+    marginTop: 20,
     marginLeft: "auto",
     marginTight: "auto",
     boxSizing: "border-box",
@@ -140,7 +140,7 @@ const SingleMoviePage = () => {
         </div>
       </div>
       <BackButton />
-      <StarRating />
+      <StarRating movieId={movie.id} />
     </>
   );
 };
