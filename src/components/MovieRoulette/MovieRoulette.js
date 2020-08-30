@@ -3,13 +3,13 @@ import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import * as constants from "../../services/constants"
 import RouletteInput from "./RouletteInput/RouletteInput";
 
-const ALERT_MESSAGE = "Please choose a genre";
-const API_KEY = process.env.API_KEY;
-const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`;
+const {API_KEY,SINGLE_MOVIE_URL} = constants;
+const ALERT_MESSAGE = "Please choose a genre";  
+const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; //constants
 const ROULETTE_TEXT = "Movie roulette : ";
-const SINGLE_MOVIE_URL = '/single-movie-page/';
 
 const useStyles = createUseStyles({
   h3: {

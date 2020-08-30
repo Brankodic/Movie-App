@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { useLocation } from "react-router-dom";
 
+import * as constants from "../services/constants";
 import BackButton from "../components/Buttons/BackButton/BackButton";
-import StarRating from "../components/Buttons/StarRating/StarRating";
+import StarRating from "../containers/StarRating/StarRating";
 
-const API_KEY = `?api_key=${process.env.API_KEY}`;
-const IMAGE_ALT = "Movie Poster";
-const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
-const GET_MOVIE_URL = `https://api.themoviedb.org/3/movie/`;
+const { API_KEY, IMAGE_PATH ,API_URL_MAIN } = constants;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -103,7 +101,7 @@ const SingleMoviePage = () => {
   useEffect(() => {
     async function getMovie() {
       const res = await fetch(
-        `${GET_MOVIE_URL}${movieUrl.pathname.slice(19)}${API_KEY}`
+        `${API_URL_MAIN }${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
       );
       res
         .json()
@@ -122,7 +120,7 @@ const SingleMoviePage = () => {
   return (
     <>
       <div className={classes.div} key={movie.id}>
-        <img className={classes.image} src={image} alt={IMAGE_ALT} />
+        <img className={classes.image} src={image} alt="Movie Poster" />
         <p className={classes.overview}>{movie.overview}</p>
         <div className={classes.text}>
           <p>

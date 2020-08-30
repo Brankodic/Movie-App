@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 
+import * as constants from "../services/constants";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
 import Modal from "../components/Modal/Modal";
 import MovieCards from "../components/MovieCards/MovieCards";
 
-const API_KEY = process.env.API_KEY;
-const GET_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-const GET_MORE_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=`;
+const { API_KEY, API_URL_MAIN } = constants;
+const GET_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=1`;
+const GET_MORE_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=`;
 
 const useStyles = createUseStyles({
   movies: {

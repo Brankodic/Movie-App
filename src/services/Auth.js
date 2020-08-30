@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 
+import * as constants from "./constants";
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import { store } from "./AuthContextProvider";
 
-const API_KEY = process.env.API_KEY;
+const { API_KEY } = constants;
+const API_AUTH_URL = "https://api.themoviedb.org/3/authentication/";
 
 const Auth = () => {
   const [state, setState] = useState({
@@ -30,7 +32,7 @@ const Auth = () => {
     if (state.token !== undefined && state.sessionId === undefined) {
       async function getSessId() {
         const res = await fetch(
-          `https://api.themoviedb.org/3/authentication/session/new?api_key=${API_KEY}&request_token=${state.token}`,
+          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${state.token}`,
           {
             method: "POST",
           }
@@ -51,9 +53,7 @@ const Auth = () => {
 
   const handleLogin = () => {
     async function fetchToken() {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/authentication/token/new?api_key=${API_KEY}`
-      );
+      const res = await fetch(`${API_AUTH_URL}token/new?api_key=${API_KEY}`);
       res
         .json()
         .then((res) => {

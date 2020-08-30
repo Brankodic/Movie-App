@@ -2,10 +2,10 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
-const IMAGE_ALT = "movie"
-const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+import *  as constants from "../../services/constants"
+
+const {IMAGE_PATH, SINGLE_MOVIE_URL} = constants;
 const LANGUAGE_TEXT = "Language : ";
-const SINGLE_MOVIE_URL = "/single-movie-page/"
 
 const useStyles = createUseStyles({
   movie: {
@@ -95,7 +95,7 @@ const MovieCards = ({ movie }) => {
         <img
           className={classes.img}
           src={IMAGE_PATH + movie.poster_path}
-          alt={IMAGE_ALT}
+          alt="movie"
         />
         <p className={classes.rating}>
           <strong>{String(movie.vote_average)}</strong>
