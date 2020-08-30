@@ -1,7 +1,8 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const AUTH_BUTTON_TEXT = "Log In";
+const LOGIN_BUTTON_TEXT = "Log In";
+const LOGOUT_BUTTON_TEXT = "Log Out";
 
 const useStyles = createUseStyles({
   auth: {
@@ -31,9 +32,19 @@ const useStyles = createUseStyles({
   },
 });
 
-const AuthButton = () => {
+const AuthButton = (props) => {
+  const { authStatus, handleLogout, handleLogin } = props;
   const classes = useStyles();
-  return <button className={classes.auth}>{AUTH_BUTTON_TEXT}</button>;
+
+  return authStatus ? (
+    <button onClick={() => handleLogout()} className={classes.auth}>
+      {LOGOUT_BUTTON_TEXT}
+    </button>
+  ) : (
+    <button onClick={() => handleLogin()} className={classes.auth}>
+      {LOGIN_BUTTON_TEXT}
+    </button>
+  );
 };
 
 export default AuthButton;

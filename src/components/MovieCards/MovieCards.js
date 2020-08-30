@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { createUseStyles } from "react-jss";
+import { Link } from "react-router-dom";
 
-const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+import *  as constants from "../../services/constants"
+
+const {IMAGE_PATH, SINGLE_MOVIE_URL} = constants;
 const LANGUAGE_TEXT = "Language : ";
 
 const useStyles = createUseStyles({
@@ -88,7 +90,7 @@ const MovieCards = ({ movie }) => {
   const classes = useStyles();
 
   return (
-    <Link className={classes.link} to={`/single-movie-page/${movie.id}`}>
+    <Link className={classes.link} to={`${SINGLE_MOVIE_URL}${movie.id}`}>
       <div key={movie.id} className={classes.movie}>
         <img
           className={classes.img}

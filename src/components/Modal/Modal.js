@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 
 import Backdrop from "./Backdrop/Backdrop";
-import MovieRoulette from "../MovieRoulette/MovieRoulette";
 import RouletteButton from "../Buttons/RouletteButton/RouletteButton";
+import MovieRoulette from "../MovieRoulette/MovieRoulette";
 
 const useStyles = createUseStyles({
   modal: {

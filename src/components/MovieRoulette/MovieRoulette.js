@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
+import * as constants from "../../services/constants"
 import RouletteInput from "./RouletteInput/RouletteInput";
 
-const API_KEY = process.env.API_KEY;
+const {API_KEY,SINGLE_MOVIE_URL} = constants;
+const ALERT_MESSAGE = "Please choose a genre";  
+const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; //constants
 const ROULETTE_TEXT = "Movie roulette : ";
 
 const useStyles = createUseStyles({
@@ -33,33 +36,30 @@ const MovieRoulette = () => {
     movieId: 0,
     genre: 0,
   });
-
+  
+  const { movieId, genre } = roulette;
   const classes = useStyles();
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    async function fetchRandomMovieId() {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${roulette.genre}`
-      );
-      res
-        .json()
-        .then((res) => {
-          const randomNum = Math.floor(Math.random() * 20);
-          setState({
-            ...roulette,
-            movieId: res.results[randomNum].id,
-          });
-        })
-        .catch((err) => console.log(err));
+    if (isMounted.current) {
+      async function getRandomMovieId() {
+        const res = await fetch(`${GET_RANDOM_URL}${genre}`);
+        res
+          .json()
+          .then((res) => {
+            setState({
+              ...roulette,
+              movieId: res.results[Math.floor(Math.random() * 20)].id,
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+      getRandomMovieId();
+    } else {
+      isMounted.current = true;
     }
-    fetchRandomMovieId();
   }, [roulette.genre]);
-
-  const handleReroute = (id) => {
-    if (roulette.genre === 0) {
-      alert("Please choose a genre.");
-    }
-  };
 
   const handleGenre = (id) => {
     setState({ ...roulette, genre: id });
@@ -68,17 +68,14 @@ const MovieRoulette = () => {
   return (
     <div className={classes.div}>
       <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
-      <RouletteInput handleGenre={handleGenre} genre={roulette.genre} />
+      <RouletteInput handleGenre={handleGenre} genre={genre} />
       {roulette.movieId > 0 ? (
-        <Link to={`/single-movie-page/${roulette.movieId}`}>
-          <FaDiceD20
-            onClick={() => handleReroute(roulette.genre)}
-            className={classes.button}
-          ></FaDiceD20>
+        <Link to={`${SINGLE_MOVIE_URL}${movieId}`}>
+          <FaDiceD20 className={classes.button}></FaDiceD20>
         </Link>
       ) : (
         <FaDiceD20
-          onClick={() => handleReroute(roulette.genre)}
+          onClick={() => alert(ALERT_MESSAGE)}
           className={classes.button}
         />
       )}

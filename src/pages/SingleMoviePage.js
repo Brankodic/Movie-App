@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { useLocation } from "react-router-dom";
 
+import * as constants from "../services/constants";
 import BackButton from "../components/Buttons/BackButton/BackButton";
 import StarRating from "../components/Buttons/StarRating/StarRating";
 
-const API_KEY = process.env.API_KEY;
-const IMAGE_PATH = "https://image.tmdb.org/t/p/w500";
+const { API_KEY, IMAGE_PATH ,API_URL_MAIN } = constants;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -23,7 +23,7 @@ const useStyles = createUseStyles({
     textAlign: "center",
     top: 5,
     display: "block",
-    marginTop: 50,
+    marginTop: 20,
     marginLeft: "auto",
     marginTight: "auto",
     boxSizing: "border-box",
@@ -92,17 +92,16 @@ const useStyles = createUseStyles({
 });
 
 const SingleMoviePage = () => {
-  const [state, setState] = useState({ movie: {}, image: "" });
+  const [state, setState] = useState({ movie: {}, image: undefined });
 
-  const movie = state.movie;
-  const image = state.image;
+  const { movie, image } = state;
   const classes = useStyles();
   const movieUrl = useLocation();
 
   useEffect(() => {
-    async function fetchMovie() {
+    async function getMovie() {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieUrl.pathname.slice(19)}?api_key=${API_KEY}&language=en-US`
+        `${API_URL_MAIN }${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
       );
       res
         .json()
@@ -115,7 +114,7 @@ const SingleMoviePage = () => {
         })
         .catch((err) => console.log(err));
     }
-    fetchMovie();
+    getMovie();
   }, [movieUrl]);
 
   return (
@@ -139,7 +138,7 @@ const SingleMoviePage = () => {
         </div>
       </div>
       <BackButton />
-      <StarRating />
+      <StarRating movieId={movie.id} />
     </>
   );
 };

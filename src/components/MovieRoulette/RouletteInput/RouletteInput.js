@@ -5,6 +5,7 @@ const GENRE_VALUE = {
   genreNames: ["comedy", "action", "thriller", "horror", "fantasy", "romance"],
   genreId: [35, 28, 53, 27, 14, 10749],
 };
+
 const useStyles = createUseStyles({
   input: {
     marginLeft: 115,
