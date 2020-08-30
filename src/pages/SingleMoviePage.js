@@ -17,7 +17,7 @@ const useStyles = createUseStyles({
     width: 500,
     margin: "auto",
   },
-  image: {
+  img: {
     width: "100%",
     height: "100%",
     position: "static",
@@ -30,7 +30,7 @@ const useStyles = createUseStyles({
     boxSizing: "border-box",
     boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.5)",
   },
-  overview: {
+  overviewClass: {
     animation: "$glowing 5000ms infinite",
     transition: "0.5s",
     backgroundColor: "rgba(170, 170, 170, 0.5)",
@@ -101,6 +101,14 @@ const SingleMoviePage = () => {
 
   const { movie, image, movieUrl } = state;
   const classes = useStyles();
+  const { div, img, overviewClass, text } = classes;
+  const {
+    id,
+    overview,
+    vote_average,
+    popularity,
+    original_language,
+  } = state.movie;
 
   useEffect(() => {
     (async () => {
@@ -117,26 +125,26 @@ const SingleMoviePage = () => {
 
   return (
     <>
-      <div className={classes.div} key={movie.id}>
-        <img className={classes.image} src={image} alt="Movie Poster" />
-        <p className={classes.overview}>{movie.overview}</p>
-        <div className={classes.text}>
+      <div className={div} key={id}>
+        <img className={img} src={image} alt="Movie Poster" />
+        <p className={overviewClass}>{overview}</p>
+        <div className={text}>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[0]}</strong>
-            {movie.vote_average}
+            {vote_average}
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[1]}</strong>
-            {movie.popularity}
+            {popularity}
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[2]}</strong>
-            {movie.original_language}
+            {original_language}
           </p>
         </div>
       </div>
       <BackButton />
-      <StarRating movieId={movie.id} />
+      <StarRating movieId={id} />
     </>
   );
 };

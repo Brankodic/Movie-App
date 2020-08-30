@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../services/constants";
-import {getData} from "../../../services/api"
+import { getData } from "../../../services/api";
 import { store } from "../../../services/AuthContextProvider";
 
 const { API_KEY, API_URL_MAIN } = constants;
@@ -41,6 +41,7 @@ const StarRating = () => {
   const { rate, ratingHover, authStatus, sessionId, movieId } = state;
   const globalState = useContext(store);
   const classes = useStyles();
+  const { container, input, star } = classes;
 
   useEffect(() => {
     setState({
@@ -51,7 +52,7 @@ const StarRating = () => {
   }, [globalState]);
 
   useEffect(() => {
-    if (authStatus) {
+    if (authStatus)
       (async () => {
         const res = await getData(
           `${API_URL_MAIN}${movieId}/account_states?api_key=${API_KEY}&session_id=${sessionId}`
@@ -61,7 +62,6 @@ const StarRating = () => {
           rate: res.rated.value,
         });
       })();
-    }
   }, [authStatus]);
 
   const handlerClicked = (value) => {
@@ -89,7 +89,7 @@ const StarRating = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={container}>
       <p>
         <strong>{USER_RATING_TEXT}</strong>
       </p>
@@ -98,14 +98,14 @@ const StarRating = () => {
         return (
           <label key={i}>
             <input
-              className={classes.input}
+              className={input}
               type="radio"
               name="rating"
               value={ratingValue}
               onClick={() => handlerClicked(ratingValue)}
             />
             <FaStar
-              className={classes.star}
+              className={star}
               color={
                 ratingValue <= (ratingHover || rate) ? "#ff1a1a" : "#e4e5e9"
               }

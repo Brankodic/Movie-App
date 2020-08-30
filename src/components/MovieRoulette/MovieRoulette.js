@@ -4,7 +4,7 @@ import { FaDiceD20 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import * as constants from "../../services/constants";
-import {getData} from "../../services/api"
+import { getData } from "../../services/api";
 import RouletteInput from "./RouletteInput/RouletteInput";
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;
@@ -40,6 +40,7 @@ const MovieRoulette = () => {
 
   const { movieId, genre } = roulette;
   const classes = useStyles();
+  const { h3, button } = classes;
   const isMounted = useRef(false);
 
   useEffect(() => {
@@ -59,17 +60,17 @@ const MovieRoulette = () => {
   };
 
   return (
-    <div className={classes.div}>
-      <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
+    <div>
+      <h3 className={h3}>{ROULETTE_TEXT}</h3>
       <RouletteInput handleGenre={handleGenre} genre={genre} />
-      {roulette.movieId > 0 ? (
+      {movieId > 0 ? (
         <Link to={`${SINGLE_MOVIE_URL}${movieId}`}>
-          <FaDiceD20 className={classes.button}></FaDiceD20>
+          <FaDiceD20 className={button}></FaDiceD20>
         </Link>
       ) : (
         <FaDiceD20
           onClick={() => alert(ALERT_MESSAGE)}
-          className={classes.button}
+          className={button}
         />
       )}
     </div>

@@ -40,6 +40,7 @@ const MovieListPage = () => {
   } = movieListState;
 
   const classes = useStyles();
+  const { movies } = classes;
 
   useEffect(() => {
     if (loadMoreCounter < 2)
@@ -73,7 +74,7 @@ const MovieListPage = () => {
 
   return (
     <>
-      <div className={classes.movies}>
+      <div className={movies}>
         {moviesArray.slice(0, movieSliceValue).map((movie) => (
           <MovieCards key={movie.id} movie={movie} />
         ))}

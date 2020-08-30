@@ -2,13 +2,13 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
-import *  as constants from "../../services/constants"
+import * as constants from "../../services/constants";
 
-const {IMAGE_PATH, SINGLE_MOVIE_URL} = constants;
+const { IMAGE_PATH, SINGLE_MOVIE_URL } = constants;
 const LANGUAGE_TEXT = "Language : ";
 
 const useStyles = createUseStyles({
-  movie: {
+  container: {
     boxSizing: "border-box",
     alignSelf: "center",
     padding: 0,
@@ -50,7 +50,7 @@ const useStyles = createUseStyles({
     border: "3px solid rgb(255, 255, 255)",
     background: "linear-gradient(135deg, #FF3500, #A62300)",
   },
-  title: {
+  titleClass: {
     color: "white",
     fontSize: "1.2rem",
     textShadow: "2px 2px 2px rgba(10, 10, 10, 0.6)",
@@ -88,28 +88,33 @@ const useStyles = createUseStyles({
 
 const MovieCards = ({ movie }) => {
   const classes = useStyles();
+  const {
+    id,
+    poster_path,
+    vote_average,
+    title,
+    release_date,
+    original_language,
+  } = movie;
+  const { container, img, rating, titleClass, year, language, link } = classes;
 
   return (
-    <Link className={classes.link} to={`${SINGLE_MOVIE_URL}${movie.id}`}>
-      <div key={movie.id} className={classes.movie}>
-        <img
-          className={classes.img}
-          src={IMAGE_PATH + movie.poster_path}
-          alt="movie"
-        />
-        <p className={classes.rating}>
-          <strong>{String(movie.vote_average)}</strong>
+    <Link className={link} to={`${SINGLE_MOVIE_URL}${id}`}>
+      <div key={id} className={container}>
+        <img className={img} src={IMAGE_PATH + poster_path} alt="movie" />
+        <p className={rating}>
+          <strong>{String(vote_average)}</strong>
         </p>
-        <p className={classes.title}>
-          <strong>{movie.title}</strong>
+        <p className={titleClass}>
+          <strong>{title}</strong>
         </p>
-        <p className={classes.year}>
-          <i>({movie.release_date.slice(0, 4)})</i>
+        <p className={year}>
+          <i>({release_date.slice(0, 4)})</i>
         </p>
-        <p className={classes.language}>
+        <p className={language}>
           <i>
             {LANGUAGE_TEXT}
-            {movie.original_language}
+            {original_language}
           </i>
         </p>
       </div>

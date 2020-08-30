@@ -37,16 +37,17 @@ const useStyles = createUseStyles({
 });
 
 const Modal = () => {
-  const [modal, setModal] = useState(false);
+  const [state, setState] = useState(false);
   const classes = useStyles();
+  const { modal , modalFalse} = classes;
 
   return (
     <div>
-      <Backdrop modal={modal} closeModal={() => setModal(false)} />
-      <div className={modal ? classes.modal : classes.modalFalse}>
+      <Backdrop modal={state} closeModal={() => setState(false)} />
+      <div className={state ? modal : modalFalse}>
         <MovieRoulette />
       </div>
-      <RouletteButton openModal={() => setModal(true)} />
+      <RouletteButton openModal={() => setState(true)} />
     </div>
   );
 };
