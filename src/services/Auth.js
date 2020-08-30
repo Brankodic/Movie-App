@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 
-import * as constants from "./constants";
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
+import * as constants from "./constants";
+import{getData} from "./api"
 import { store } from "./AuthContextProvider";
 
 const { API_KEY } = constants;
@@ -54,20 +55,14 @@ const Auth = () => {
       }
       getSessId();
     }
-  }, [token]);
+  }, [token,sessionId]);
 
   const handleLogin = () => {
-    async function getToken() {
-      const res = await fetch(`${API_AUTH_URL}token/new?api_key=${API_KEY}`);
-      res
-        .json()
-        .then((res) => {
-          Cookies.set("request_token", `${res.request_token}`);
-          window.location = `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=http://localhost:8080/#/approved`;
-        })
-        .catch((err) => console.log(err));
-    }
-    getToken();
+    (async () => {
+      const res = await getData(`${API_AUTH_URL}token/new?api_key=${API_KEY}`);
+      Cookies.set("request_token", `${res.request_token}`);
+      window.location = `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=http://localhost:8080/#/approved`;
+    })();
   };
 
   const handleLogout = () => {

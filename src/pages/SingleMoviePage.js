@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { useLocation } from "react-router-dom";
 
+import { getData } from "../services/api";
 import * as constants from "../services/constants";
 import BackButton from "../components/Buttons/BackButton/BackButton";
 import StarRating from "../components/Buttons/StarRating/StarRating";
 
-const { API_KEY, IMAGE_PATH ,API_URL_MAIN } = constants;
+const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -92,29 +93,26 @@ const useStyles = createUseStyles({
 });
 
 const SingleMoviePage = () => {
-  const [state, setState] = useState({ movie: {}, image: undefined });
+  const [state, setState] = useState({
+    movie: {},
+    image: undefined,
+    movieUrl: useLocation(),
+  });
 
-  const { movie, image } = state;
+  const { movie, image, movieUrl } = state;
   const classes = useStyles();
-  const movieUrl = useLocation();
 
   useEffect(() => {
-    async function getMovie() {
-      const res = await fetch(
-        `${API_URL_MAIN }${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
+    (async () => {
+      const res = await getData(
+        `${API_URL_MAIN}${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
       );
-      res
-        .json()
-        .then((res) => {
-          setState({
-            ...state,
-            movie: res,
-            image: IMAGE_PATH + res.poster_path,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-    getMovie();
+      setState({
+        ...state,
+        movie: res,
+        image: IMAGE_PATH + res.poster_path,
+      });
+    })();
   }, [movieUrl]);
 
   return (

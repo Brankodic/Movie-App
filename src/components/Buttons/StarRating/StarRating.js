@@ -4,10 +4,11 @@ import { createUseStyles } from "react-jss";
 import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
-import *  as constants from "../../../services/constants"
+import * as constants from "../../../services/constants";
+import {getData} from "../../../services/api"
 import { store } from "../../../services/AuthContextProvider";
 
-const { API_KEY, API_URL_MAIN} = constants;
+const { API_KEY, API_URL_MAIN } = constants;
 const USER_RATING_TEXT = "User Rating : ";
 
 const useStyles = createUseStyles({
@@ -50,18 +51,16 @@ const StarRating = () => {
   }, [globalState]);
 
   useEffect(() => {
-    if (authStatus === true) {
-      async function getRating() {
-        const res = await fetch(
+    if (authStatus) {
+      (async () => {
+        const res = await getData(
           `${API_URL_MAIN}${movieId}/account_states?api_key=${API_KEY}&session_id=${sessionId}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setState({ ...state, rate: data.rated.value });
-          })
-          .catch((err) => console.log(err));
-      }
-      getRating();
+        );
+        setState({
+          ...state,
+          rate: res.rated.value,
+        });
+      })();
     }
   }, [authStatus]);
 
