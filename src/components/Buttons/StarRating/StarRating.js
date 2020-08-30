@@ -4,8 +4,8 @@ import { createUseStyles } from "react-jss";
 import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
-import *  as constants from "../../services/constants"
-import { store } from "../../services/AuthContextProvider";
+import *  as constants from "../../../services/constants"
+import { store } from "../../../services/AuthContextProvider";
 
 const { API_KEY, API_URL_MAIN} = constants;
 const USER_RATING_TEXT = "User Rating : ";

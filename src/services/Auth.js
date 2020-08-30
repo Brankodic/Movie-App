@@ -15,26 +15,31 @@ const Auth = () => {
     loggedIn: undefined,
   });
 
+  const { sessionId, token, loggedIn } = state;
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
   useEffect(() => {
-    if (state.sessionId === undefined) {
+    if (sessionId === undefined) {
       dispatch({ type: "log out" });
       setState({ ...state, loggedIn: false });
     } else {
       dispatch({ type: "log in" });
       setState({ ...state, loggedIn: true });
     }
-  }, [state.sessionId]);
+  }, [sessionId]);
 
   useEffect(() => {
-    if (state.token !== undefined && state.sessionId === undefined) {
+    if (token !== undefined && sessionId === undefined) {
       async function getSessId() {
-        const res = await fetch(
-          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${state.token}`,
+        await fetch(
+          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${token}`,
           {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({ request_token: token }),
           }
         )
           .then((res) => res.json())
@@ -49,10 +54,10 @@ const Auth = () => {
       }
       getSessId();
     }
-  }, [state.token]);
+  }, [token]);
 
   const handleLogin = () => {
-    async function fetchToken() {
+    async function getToken() {
       const res = await fetch(`${API_AUTH_URL}token/new?api_key=${API_KEY}`);
       res
         .json()
@@ -62,7 +67,7 @@ const Auth = () => {
         })
         .catch((err) => console.log(err));
     }
-    fetchToken();
+    getToken();
   };
 
   const handleLogout = () => {
@@ -77,7 +82,7 @@ const Auth = () => {
 
   return (
     <AuthButton
-      authStatus={state.loggedIn}
+      authStatus={loggedIn}
       handleLogin={handleLogin}
       handleLogout={handleLogout}
     />
