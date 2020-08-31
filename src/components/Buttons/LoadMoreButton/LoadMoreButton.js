@@ -28,6 +28,12 @@ const useStyles = createUseStyles({
     "&:focus": {
       outline: "none",
     },
+    "@media (max-width: 1024px)": {
+      left: "46%",
+    },
+    "@media (max-width: 640px)": {
+      left: "44%",
+    },
   },
 });
 

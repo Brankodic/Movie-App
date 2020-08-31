@@ -26,6 +26,12 @@ const useStyles = createUseStyles({
       boxShadow: "4px 4px 5px rgba(0, 0, 0, 0.6)",
       cursor: "pointer",
     },
+    "@media (max-width: 1024px)": {
+      width: 380,
+    },
+    "@media (max-width: 640px)": {
+      width: "99%",
+    },
   },
   img: {
     height: "calc(100% - 6.8rem)",
@@ -45,10 +51,15 @@ const useStyles = createUseStyles({
     fontSize: "1rem",
     padding: "1em",
     borderRadius: "50%",
-    left: "94%",
+    left: "93%",
     bottom: "83%",
     border: "3px solid rgb(255, 255, 255)",
-    background: "linear-gradient(135deg, #FF3500, #A62300)",
+    background: "linear-gradient(135deg, #FF3500, #A62300)","@media (max-width: 1024px)": {
+      left: "92%",
+    },
+    "@media (max-width: 640px)": {
+      left: "90%",
+    },
   },
   titleClass: {
     color: "white",

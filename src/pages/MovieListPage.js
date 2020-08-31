@@ -21,6 +21,12 @@ const useStyles = createUseStyles({
     margin: "0 auto",
     marginBottom: "8em",
     marginTop: "4em",
+    "@media (max-width: 1250px)": {
+      gridTemplateColumns: "auto auto",
+    },
+    "@media (max-width: 640px)": {
+      gridTemplateColumns: "auto",
+    },
   },
 });
 
