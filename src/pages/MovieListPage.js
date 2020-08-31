@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 
 import * as constants from "../services/constants";
+import { getData } from "../services/api";
 import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
 import Modal from "../components/Modal/Modal";
 import MovieCards from "../components/MovieCards/MovieCards";
@@ -39,45 +40,31 @@ const MovieListPage = () => {
   } = movieListState;
 
   const classes = useStyles();
+  const { movies } = classes;
 
   useEffect(() => {
-    getMovies();
+    if (loadMoreCounter < 2)
+      (async () => {
+        const res = await getData(GET_MOVIES_URL);
+        setState({
+          ...movieListState,
+          moviesArray: res.results,
+        });
+      })();
   }, []);
 
-  async function getMovies() {
-    if (loadMoreCounter < 2) {
-      const res = await fetch(GET_MOVIES_URL);
-      res
-        .json()
-        .then((res) => {
-          setState({
-            ...movieListState,
-            moviesArray: res.results,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-
   const handleLoadMore = () => {
-    if (loadMoreCounter % 3 == 0) {
-      async function getMoreMovies() {
-        const res = await fetch(`${GET_MORE_MOVIES_URL}${apiMoviesPage}`);
-        res
-          .json()
-          .then((res) => {
-            setState({
-              ...movieListState,
-              moviesArray: moviesArray.concat(res.results),
-              apiMoviesPage: apiMoviesPage + 1,
-              loadMoreCounter: loadMoreCounter + 1,
-              movieSliceValue: movieSliceValue + 6,
-            });
-          })
-          .catch((err) => consoleLog(err));
-      }
-      getMoreMovies();
-    }
+    if (loadMoreCounter % 3 == 0)
+      (async () => {
+        const res = await getData(`${GET_MORE_MOVIES_URL}${apiMoviesPage}`);
+        setState({
+          ...movieListState,
+          moviesArray: moviesArray.concat(res.results),
+          apiMoviesPage: apiMoviesPage + 1,
+          loadMoreCounter: loadMoreCounter + 1,
+          movieSliceValue: movieSliceValue + 6,
+        });
+      })();
     setState({
       ...movieListState,
       loadMoreCounter: loadMoreCounter + 1,
@@ -87,7 +74,7 @@ const MovieListPage = () => {
 
   return (
     <>
-      <div className={classes.movies}>
+      <div className={movies}>
         {moviesArray.slice(0, movieSliceValue).map((movie) => (
           <MovieCards key={movie.id} movie={movie} />
         ))}

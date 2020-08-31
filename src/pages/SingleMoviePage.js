@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { useLocation } from "react-router-dom";
 
+import { getData } from "../services/api";
 import * as constants from "../services/constants";
 import BackButton from "../components/Buttons/BackButton/BackButton";
 import StarRating from "../components/Buttons/StarRating/StarRating";
 
-const { API_KEY, IMAGE_PATH ,API_URL_MAIN } = constants;
+const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
@@ -16,7 +17,7 @@ const useStyles = createUseStyles({
     width: 500,
     margin: "auto",
   },
-  image: {
+  img: {
     width: "100%",
     height: "100%",
     position: "static",
@@ -29,7 +30,7 @@ const useStyles = createUseStyles({
     boxSizing: "border-box",
     boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.5)",
   },
-  overview: {
+  overviewClass: {
     animation: "$glowing 5000ms infinite",
     transition: "0.5s",
     backgroundColor: "rgba(170, 170, 170, 0.5)",
@@ -92,53 +93,58 @@ const useStyles = createUseStyles({
 });
 
 const SingleMoviePage = () => {
-  const [state, setState] = useState({ movie: {}, image: undefined });
+  const [state, setState] = useState({
+    movie: {},
+    image: undefined,
+    movieUrl: useLocation(),
+  });
 
-  const { movie, image } = state;
+  const { movie, image, movieUrl } = state;
   const classes = useStyles();
-  const movieUrl = useLocation();
+  const { div, img, overviewClass, text } = classes;
+  const {
+    id,
+    overview,
+    vote_average,
+    popularity,
+    original_language,
+  } = state.movie;
 
   useEffect(() => {
-    async function getMovie() {
-      const res = await fetch(
-        `${API_URL_MAIN }${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
+    (async () => {
+      const res = await getData(
+        `${API_URL_MAIN}${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
       );
-      res
-        .json()
-        .then((res) => {
-          setState({
-            ...state,
-            movie: res,
-            image: IMAGE_PATH + res.poster_path,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-    getMovie();
+      setState({
+        ...state,
+        movie: res,
+        image: IMAGE_PATH + res.poster_path,
+      });
+    })();
   }, [movieUrl]);
 
   return (
     <>
-      <div className={classes.div} key={movie.id}>
-        <img className={classes.image} src={image} alt="Movie Poster" />
-        <p className={classes.overview}>{movie.overview}</p>
-        <div className={classes.text}>
+      <div className={div} key={id}>
+        <img className={img} src={image} alt="Movie Poster" />
+        <p className={overviewClass}>{overview}</p>
+        <div className={text}>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[0]}</strong>
-            {movie.vote_average}
+            {vote_average}
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[1]}</strong>
-            {movie.popularity}
+            {popularity}
           </p>
           <p>
             <strong>{SINGLE_MOVIE_TEXT[2]}</strong>
-            {movie.original_language}
+            {original_language}
           </p>
         </div>
       </div>
       <BackButton />
-      <StarRating movieId={movie.id} />
+      <StarRating movieId={id} />
     </>
   );
 };

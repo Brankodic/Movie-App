@@ -15,18 +15,20 @@ const useStyles = createUseStyles({
 
 const RouletteInput = (props) => {
   const handleGenre = props.handleGenre;
+  const { genreNames, genreId } = GENRE_VALUE;
   const classes = useStyles();
+  const { input } = classes;
 
-  return GENRE_VALUE.genreNames.map((genre, i) => (
+  return genreNames.map((genre, i) => (
     <div key={genre}>
-      <label className={classes.label}>
+      <label>
         <input
-          className={classes.input}
+          className={input}
           type="radio"
-          id={GENRE_VALUE.genreId[i]}
+          id={genreId[i]}
           name="genre"
           value={genre}
-          onClick={() => handleGenre(GENRE_VALUE.genreId[i])}
+          onClick={() => handleGenre(genreId[i])}
         ></input>
         {genre}
       </label>

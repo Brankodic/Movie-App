@@ -4,10 +4,11 @@ import { createUseStyles } from "react-jss";
 import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
-import *  as constants from "../../../services/constants"
+import * as constants from "../../../services/constants";
+import { getData , postData } from "../../../services/api";
 import { store } from "../../../services/AuthContextProvider";
 
-const { API_KEY, API_URL_MAIN} = constants;
+const { API_KEY, API_URL_MAIN } = constants;
 const USER_RATING_TEXT = "User Rating : ";
 
 const useStyles = createUseStyles({
@@ -40,6 +41,7 @@ const StarRating = () => {
   const { rate, ratingHover, authStatus, sessionId, movieId } = state;
   const globalState = useContext(store);
   const classes = useStyles();
+  const { container, input, star } = classes;
 
   useEffect(() => {
     setState({
@@ -50,37 +52,27 @@ const StarRating = () => {
   }, [globalState]);
 
   useEffect(() => {
-    if (authStatus === true) {
-      async function getRating() {
-        const res = await fetch(
+    if (authStatus)
+      (async () => {
+        const res = await getData(
           `${API_URL_MAIN}${movieId}/account_states?api_key=${API_KEY}&session_id=${sessionId}`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setState({ ...state, rate: data.rated.value });
-          })
-          .catch((err) => console.log(err));
-      }
-      getRating();
-    }
+        );
+        setState({
+          ...state,
+          rate: res.rated.value,
+        });
+      })();
   }, [authStatus]);
 
   const handlerClicked = (value) => {
     if (authStatus === true) {
-      async function postRating() {
-        const res = await fetch(
+      (async () => {
+        const res = await postData(
           `${API_URL_MAIN}${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ value: value }),
-          }
-        ).catch((err) => console.log(err));
+          { value: value }
+        );
         setState({ ...state, rate: value });
-      }
-      postRating();
+      })();
     }
     setState({ ...state, rate: value });
   };
@@ -90,7 +82,7 @@ const StarRating = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={container}>
       <p>
         <strong>{USER_RATING_TEXT}</strong>
       </p>
@@ -99,14 +91,14 @@ const StarRating = () => {
         return (
           <label key={i}>
             <input
-              className={classes.input}
+              className={input}
               type="radio"
               name="rating"
               value={ratingValue}
               onClick={() => handlerClicked(ratingValue)}
             />
             <FaStar
-              className={classes.star}
+              className={star}
               color={
                 ratingValue <= (ratingHover || rate) ? "#ff1a1a" : "#e4e5e9"
               }

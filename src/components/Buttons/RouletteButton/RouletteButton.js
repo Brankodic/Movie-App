@@ -35,9 +35,10 @@ const useStyles = createUseStyles({
 const RouletteButton = (props) => {
   const { openModal } = props;
   const classes = useStyles();
+  const { roulette } = classes;
 
   return (
-    <button className={classes.roulette} onClick={() => openModal()}>
+    <button className={roulette} onClick={() => openModal()}>
       {ROULETTE_BUTTON_TEXT}
     </button>
   );

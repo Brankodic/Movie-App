@@ -35,13 +35,14 @@ const useStyles = createUseStyles({
 const AuthButton = (props) => {
   const { authStatus, handleLogout, handleLogin } = props;
   const classes = useStyles();
+  const { auth } = classes;
 
   return authStatus ? (
-    <button onClick={() => handleLogout()} className={classes.auth}>
+    <button onClick={() => handleLogout()} className={auth}>
       {LOGOUT_BUTTON_TEXT}
     </button>
   ) : (
-    <button onClick={() => handleLogin()} className={classes.auth}>
+    <button onClick={() => handleLogin()} className={auth}>
       {LOGIN_BUTTON_TEXT}
     </button>
   );

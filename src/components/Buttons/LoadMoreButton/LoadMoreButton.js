@@ -1,10 +1,10 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const LOAD_BUTTON_TEXT="Load More"
+const LOAD_BUTTON_TEXT = "Load More";
 
 const useStyles = createUseStyles({
-  load: {
+  loadButton: {
     fontFamily: '"Alegreya Sans SC", sans-serif',
     position: "fixed",
     border: "3px solid rgb(255, 255, 255)",
@@ -26,15 +26,21 @@ const useStyles = createUseStyles({
       cursor: "pointer",
     },
     "&:focus": {
-        outline: "none",
-      },
+      outline: "none",
+    },
   },
 });
 
 const LoadMoreButton = (props) => {
   const load = props.load;
   const classes = useStyles();
-return <button className={classes.load} onClick={load}>{LOAD_BUTTON_TEXT}</button>;
+  const { loadButton } = classes;
+
+  return (
+    <button className={loadButton} onClick={load}>
+      {LOAD_BUTTON_TEXT}
+    </button>
+  );
 };
 
 export default LoadMoreButton;

@@ -3,11 +3,12 @@ import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import * as constants from "../../services/constants"
+import * as constants from "../../services/constants";
+import { getData } from "../../services/api";
 import RouletteInput from "./RouletteInput/RouletteInput";
 
-const {API_KEY,SINGLE_MOVIE_URL} = constants;
-const ALERT_MESSAGE = "Please choose a genre";  
+const { API_KEY, SINGLE_MOVIE_URL } = constants;
+const ALERT_MESSAGE = "Please choose a genre";
 const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; //constants
 const ROULETTE_TEXT = "Movie roulette : ";
 
@@ -36,47 +37,40 @@ const MovieRoulette = () => {
     movieId: 0,
     genre: 0,
   });
-  
+
   const { movieId, genre } = roulette;
   const classes = useStyles();
+  const { h3, button } = classes;
   const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current) {
-      async function getRandomMovieId() {
-        const res = await fetch(`${GET_RANDOM_URL}${genre}`);
-        res
-          .json()
-          .then((res) => {
-            setState({
-              ...roulette,
-              movieId: res.results[Math.floor(Math.random() * 20)].id,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
-      getRandomMovieId();
-    } else {
-      isMounted.current = true;
-    }
-  }, [roulette.genre]);
+    if (isMounted.current)
+      (async () => {
+        const res = await getData(`${GET_RANDOM_URL}${genre}`);
+        setState({
+          ...roulette,
+          movieId: res.results[Math.floor(Math.random() * 20)].id,
+        });
+      })();
+    isMounted.current = true;
+  }, [genre]);
 
   const handleGenre = (id) => {
     setState({ ...roulette, genre: id });
   };
 
   return (
-    <div className={classes.div}>
-      <h3 className={classes.h3}>{ROULETTE_TEXT}</h3>
+    <div>
+      <h3 className={h3}>{ROULETTE_TEXT}</h3>
       <RouletteInput handleGenre={handleGenre} genre={genre} />
-      {roulette.movieId > 0 ? (
+      {movieId > 0 ? (
         <Link to={`${SINGLE_MOVIE_URL}${movieId}`}>
-          <FaDiceD20 className={classes.button}></FaDiceD20>
+          <FaDiceD20 className={button}></FaDiceD20>
         </Link>
       ) : (
         <FaDiceD20
           onClick={() => alert(ALERT_MESSAGE)}
-          className={classes.button}
+          className={button}
         />
       )}
     </div>

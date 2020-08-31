@@ -2,7 +2,8 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 
 const MOVIE_APP_TEXT = "Movie App";
-const POPCORN_IMAGE_LINK = "https://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/1024/PopcornTime-icon.png";
+const POPCORN_IMAGE_LINK =
+  "https://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/1024/PopcornTime-icon.png";
 
 const useStyles = createUseStyles({
   header: {
@@ -34,15 +35,12 @@ const useStyles = createUseStyles({
 
 const Header = () => {
   const classes = useStyles();
-  
+  const { img, header } = classes;
+
   return (
     <div>
-      <img
-        className={classes.img}
-        alt="Icon-popcorn"
-        src={POPCORN_IMAGE_LINK}
-      ></img>
-      <header className={classes.header}>{MOVIE_APP_TEXT}</header>
+      <img className={img} alt="Icon-popcorn" src={POPCORN_IMAGE_LINK}></img>
+      <header className={header}>{MOVIE_APP_TEXT}</header>
     </div>
   );
 };
