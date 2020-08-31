@@ -20,7 +20,7 @@ const useStyles = createUseStyles({
   },
   button: {
     color: "white",
-    marginLeft: 130,
+    marginLeft: 0,
     marginTop: 30,
     fontSize: "2.5em",
     transition: "0.3s",

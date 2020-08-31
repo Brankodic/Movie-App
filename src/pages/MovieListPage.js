@@ -84,7 +84,6 @@ const MovieListPage = () => {
         {moviesArray.slice(0, movieSliceValue).map((movie) => (
           <MovieCards key={movie.id} movie={movie} />
         ))}
-        ;
       </div>
       <Modal />
       <LoadMoreButton load={handleLoadMore} />
