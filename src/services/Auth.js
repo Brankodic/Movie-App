@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 import AuthButton from "../components/Buttons/AuthButton/AuthButton";
 import * as constants from "./constants";
-import{getData} from "./api"
+import { getData, postData } from "./api";
 import { store } from "./AuthContextProvider";
 
 const { API_KEY } = constants;
@@ -31,31 +31,22 @@ const Auth = () => {
   }, [sessionId]);
 
   useEffect(() => {
-    if (token !== undefined && sessionId === undefined) {
-      async function getSessId() {
-        await fetch(
-          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${token}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ request_token: token }),
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            Cookies.set("session_id", data.session_id);
-            setState({
-              ...state,
-              sessionId: data.session_id,
-            });
-          })
-          .catch((err) => console.log(err));
-      }
-      getSessId();
-    }
-  }, [token,sessionId]);
+    if (token !== undefined && sessionId === undefined)
+      (async () => {
+        const res = await postData(
+          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${token}`
+        );
+        if (res.session_id != undefined) {
+          Cookies.set("session_id", res.session_id);
+          setState({
+            ...state,
+            sessionId: res.session_id,
+          });
+        } else {
+          Cookies.remove("request_token");
+        }
+      })();
+  }, [token, sessionId]);
 
   const handleLogin = () => {
     (async () => {

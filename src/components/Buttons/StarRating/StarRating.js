@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../services/constants";
-import { getData } from "../../../services/api";
+import { getData , postData } from "../../../services/api";
 import { store } from "../../../services/AuthContextProvider";
 
 const { API_KEY, API_URL_MAIN } = constants;
@@ -66,20 +66,13 @@ const StarRating = () => {
 
   const handlerClicked = (value) => {
     if (authStatus === true) {
-      async function postRating() {
-        const res = await fetch(
+      (async () => {
+        const res = await postData(
           `${API_URL_MAIN}${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({ value: value }),
-          }
-        ).catch((err) => console.log(err));
+          { value: value }
+        );
         setState({ ...state, rate: value });
-      }
-      postRating();
+      })();
     }
     setState({ ...state, rate: value });
   };
