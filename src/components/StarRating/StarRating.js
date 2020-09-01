@@ -6,10 +6,9 @@ import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../constants";
 import { getData, postData } from "../../services/api";
-import { store } from "../../services/AuthContextProvider";
+import { store } from "../../services/context";
 
 const { API_KEY, API_URL_MAIN } = constants;
-const USER_RATING_TEXT = "User Rating : ";
 
 const useStyles = createUseStyles({
   container: {
@@ -84,7 +83,7 @@ const StarRating = () => {
   return (
     <div className={container}>
       <p>
-        <strong>{USER_RATING_TEXT}</strong>
+        <strong>User Rating : </strong>
       </p>
       {[...Array(10)].map((n, i) => {
         const ratingValue = i + 1;

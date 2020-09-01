@@ -18,7 +18,7 @@ const Backdrop = (props) => {
   const { modal, closeModal } = props;
 
   return modal ? (
-    <div className={backdrop} onClick={() => closeModal()}></div>
+    <div className={backdrop} onClick={closeModal}></div>
   ) : null;
 };
 

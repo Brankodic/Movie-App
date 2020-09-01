@@ -1,8 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const LOAD_BUTTON_TEXT = "Load More";
-
 const useStyles = createUseStyles({
   loadButton: {
     position: "fixed",
@@ -38,7 +36,7 @@ const LoadMoreButton = (props) => {
 
   return (
     <button className={loadButton} onClick={load}>
-      {LOAD_BUTTON_TEXT}
+      Load More
     </button>
   );
 };

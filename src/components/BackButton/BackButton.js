@@ -2,8 +2,6 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
-const BACK_BUTTON_TEXT = "Back";
-
 const useStyles = createUseStyles({
   back: {
     position: "fixed",
@@ -38,7 +36,7 @@ const BackButton = () => {
 
   return (
     <Link to="/">
-      <button className={back}>{BACK_BUTTON_TEXT}</button>
+      <button className={back}>Back</button>
     </Link>
   );
 };
