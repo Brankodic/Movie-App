@@ -19,11 +19,11 @@ const useStyles = createUseStyles({
     textAlign: "center",
   },
   button: {
-    color: "white",
+    transition: "0.3s",
     marginLeft: 130,
     marginTop: 30,
+    color: "white",
     fontSize: "2.5em",
-    transition: "0.3s",
     "&:hover": {
       transition: "0.3s",
       transform: "scale(1.1)",
