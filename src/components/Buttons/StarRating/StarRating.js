@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../services/constants";
-import { getData , postData } from "../../../services/api";
+import { getData, postData } from "../../../services/api";
 import { store } from "../../../services/AuthContextProvider";
 
 const { API_KEY, API_URL_MAIN } = constants;
@@ -25,6 +25,9 @@ const useStyles = createUseStyles({
     cursor: "pointer",
     transition: "color 200ms",
     border: 2,
+    "@media (max-width: 640px)": {
+      width: 15,
+    },
   },
 });
 

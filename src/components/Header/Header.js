@@ -20,6 +20,15 @@ const useStyles = createUseStyles({
     zIndex: 100,
     fontSize: 30,
     letterSpacing: 30,
+    "@media (max-width: 1024px)": {
+      padding: 13,
+      fontSize: 20,
+      letterSpacing: 15,
+    },
+    "@media (max-width: 640px)": {
+      fontSize: 15,
+      letterSpacing: 10,
+    },
   },
   img: {
     position: "absolute",
@@ -30,6 +39,12 @@ const useStyles = createUseStyles({
     margin: 0,
     width: 50,
     height: 50,
+    "@media (max-width: 1024px)": {
+      top: 3,
+      left: 10,
+      width: 40,
+      height: 40,
+    },
   },
 });
 
