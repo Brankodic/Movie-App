@@ -3,9 +3,9 @@ import { createUseStyles } from "react-jss";
 import { useLocation } from "react-router-dom";
 
 import { getData } from "../services/api";
-import * as constants from "../services/constants";
-import BackButton from "../components/Buttons/BackButton/BackButton";
-import StarRating from "../components/Buttons/StarRating/StarRating";
+import * as constants from "../../constants";
+import BackButton from "../components/BackButton/BackButton";
+import StarRating from "../components/StarRating/StarRating";
 
 const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
 const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];

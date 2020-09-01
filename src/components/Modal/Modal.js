@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 
-import Backdrop from "./Backdrop/Backdrop";
-import RouletteButton from "../Buttons/RouletteButton/RouletteButton";
+import Backdrop from "../BackdropModal/Backdrop";
+import RouletteButton from "../RouletteButton/RouletteButton";
 import MovieRoulette from "../MovieRoulette/MovieRoulette";
 
 const useStyles = createUseStyles({

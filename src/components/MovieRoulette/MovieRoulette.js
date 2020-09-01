@@ -3,9 +3,9 @@ import { createUseStyles } from "react-jss";
 import { FaDiceD20 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import * as constants from "../../services/constants";
+import * as constants from "../../../constants";
 import { getData } from "../../services/api";
-import RouletteInput from "./RouletteInput/RouletteInput";
+import RouletteInput from "../RouletteInput/RouletteInput";
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;
 const ALERT_MESSAGE = "Please choose a genre";

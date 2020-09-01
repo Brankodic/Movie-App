@@ -4,9 +4,9 @@ import { createUseStyles } from "react-jss";
 import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
-import * as constants from "../../../services/constants";
-import { getData , postData } from "../../../services/api";
-import { store } from "../../../services/AuthContextProvider";
+import * as constants from "../../../constants";
+import { getData, postData } from "../../services/api";
+import { store } from "../../services/AuthContextProvider";
 
 const { API_KEY, API_URL_MAIN } = constants;
 const USER_RATING_TEXT = "User Rating : ";
@@ -67,7 +67,7 @@ const StarRating = () => {
   const handlerClicked = (value) => {
     if (authStatus === true) {
       (async () => {
-        const res = await postData(
+        await postData(
           `${API_URL_MAIN}${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`,
           { value: value }
         );

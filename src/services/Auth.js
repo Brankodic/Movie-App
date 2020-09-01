@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 
-import AuthButton from "../components/Buttons/AuthButton/AuthButton";
-import * as constants from "./constants";
+import AuthButton from "../components/AuthButton/AuthButton";
+import * as constants from "../../constants";
 import { getData, postData } from "./api";
 import { store } from "./AuthContextProvider";
 

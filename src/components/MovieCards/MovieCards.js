@@ -2,7 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
-import * as constants from "../../services/constants";
+import * as constants from "../../../constants";
 
 const { IMAGE_PATH, SINGLE_MOVIE_URL } = constants;
 const LANGUAGE_TEXT = "Language : ";
