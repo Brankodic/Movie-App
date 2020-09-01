@@ -13,18 +13,18 @@ const USER_RATING_TEXT = "User Rating : ";
 
 const useStyles = createUseStyles({
   container: {
-    textAlign: "center",
-    margin: "auto",
-    width: "50%",
     position: "relative",
+    width: "50%",
+    margin: "auto",
+    textAlign: "center",
   },
   input: {
     display: "none",
   },
   star: {
-    cursor: "pointer",
     transition: "color 200ms",
     border: 2,
+    cursor: "pointer",
   },
 });
 

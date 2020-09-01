@@ -11,7 +11,7 @@ import SingleMoviePage from "./pages/SingleMoviePage";
 const App = () => {
   return (
     <Router>
-      <AuthProvider >
+      <AuthProvider>
         <Header />
         <Route exact path="/">
           <MovieListPage />
