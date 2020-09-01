@@ -1,15 +1,12 @@
-export default {
+// eslint-disable-next-line no-undef
+module.exports = {
     "env": {
         "browser": true,
         "es2021": true
     },
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true
-    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -21,11 +18,12 @@ export default {
     "plugins": [
         "react"
     ],
-    "rules": {
+    "rules": { 
+        "react/prop-types": 0
     },
     "settings": {
         "react": {
-          "version": "detect"
+            "version": "detect"
         }
-      }
+    }
 };

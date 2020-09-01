@@ -42,10 +42,10 @@ const AuthButton = (props) => {
       {LOGOUT_BUTTON_TEXT}
     </button>
   ) : (
-    <button onClick={() => handleLogin()} className={auth}>
-      {LOGIN_BUTTON_TEXT}
-    </button>
-  );
+      <button onClick={() => handleLogin()} className={auth}>
+        {LOGIN_BUTTON_TEXT}
+      </button>
+    );
 };
 
 export default AuthButton;
