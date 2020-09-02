@@ -2,12 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 
 import * as constants from "../../../constants";
-import { getData, postData } from "../../services/api";
+import {
+  getData,
+  postData,
+  getSessionIdUrl,
+  getTokenUrl,
+} from "../../services/api";
 import { store } from "../../services/context";
 import useStyles from "./style";
 
-const { API_KEY } = constants;
-const API_AUTH_URL = "https://api.themoviedb.org/3/authentication/";
+const { API_KEY, REDIRECT_AUTH_URL } = constants;
 
 const Auth = () => {
   const [state, setState] = useState({
@@ -35,9 +39,7 @@ const Auth = () => {
   useEffect(() => {
     if (token !== undefined && sessionId === undefined)
       (async () => {
-        const res = await postData(
-          `${API_AUTH_URL}session/new?api_key=${API_KEY}&request_token=${token}`
-        );
+        const res = await postData(getSessionIdUrl(API_KEY, token));
         if (res.session_id != undefined) {
           Cookies.set("session_id", res.session_id);
           setState({
@@ -52,9 +54,9 @@ const Auth = () => {
 
   const handleLogin = () => {
     (async () => {
-      const res = await getData(`${API_AUTH_URL}token/new?api_key=${API_KEY}`);
+      const res = await getData(getTokenUrl(API_KEY)); 
       Cookies.set("request_token", `${res.request_token}`);
-      window.location = `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=http://localhost:8080/#/approved`;
+      window.location = `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=${REDIRECT_AUTH_URL}`;
     })();
   };
 

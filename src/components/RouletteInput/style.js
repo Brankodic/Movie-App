@@ -2,8 +2,9 @@ import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
   input: {
-    marginLeft: 115,
-    marginTop: 7,
+    textAlign: "left",
+    marginLeft: 110,
+    marginTop: 5,
   },
 });
 

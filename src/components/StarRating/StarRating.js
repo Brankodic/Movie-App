@@ -4,11 +4,16 @@ import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../constants";
-import { getData, postData } from "../../services/api";
+import {
+  getData,
+  postData,
+  getRatingUrl,
+  getPostRatingUrl,
+} from "../../services/api";
 import { store } from "../../services/context";
 import useStyles from "./style";
 
-const { API_KEY, API_URL_MAIN } = constants;
+const { API_KEY } = constants;
 
 const StarRating = () => {
   const [state, setState] = useState({
@@ -36,9 +41,7 @@ const StarRating = () => {
   useEffect(() => {
     if (authStatus)
       (async () => {
-        const res = await getData(
-          `${API_URL_MAIN}${movieId}/account_states?api_key=${API_KEY}&session_id=${sessionId}`
-        );
+        const res = await getData(getRatingUrl(API_KEY, movieId, sessionId));
         setState({
           ...state,
           rate: res.rated.value,
@@ -49,10 +52,9 @@ const StarRating = () => {
   const handlerClicked = (value) => {
     if (authStatus === true) {
       (async () => {
-        await postData(
-          `${API_URL_MAIN}${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`,
-          { value: value }
-        );
+        await postData(getPostRatingUrl(API_KEY, movieId, sessionId), {
+          value: value,
+        });
         setState({ ...state, rate: value });
       })();
     }

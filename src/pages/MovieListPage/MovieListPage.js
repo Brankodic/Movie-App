@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import * as constants from "../../../constants";
-import { getData } from "../../services/api";
+import { getData, getMoreMoviesUrl, getMovieListUrl } from "../../services/api";
 import useStyles from "./style";
 
-import { ButtonLoadMore, Modal, MovieCards} from "../../components"
+import { ButtonLoadMore, Modal, MovieCards } from "../../components";
 
-const { API_KEY, API_URL_MAIN } = constants;
-const GET_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=1`;
-const GET_MORE_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=`;
+const { API_KEY } = constants;
 
 const MovieListPage = () => {
   const [movieListState, setState] = useState({
@@ -31,7 +29,7 @@ const MovieListPage = () => {
   useEffect(() => {
     if (loadMoreCounter < 2)
       (async () => {
-        const res = await getData(GET_MOVIES_URL);
+        const res = await getData(getMovieListUrl(API_KEY));
         setState({
           ...movieListState,
           moviesArray: res.results,
@@ -42,7 +40,7 @@ const MovieListPage = () => {
   const handleLoadMore = () => {
     if (loadMoreCounter % 3 == 0)
       (async () => {
-        const res = await getData(`${GET_MORE_MOVIES_URL}${apiMoviesPage}`);
+        const res = await getData(getMoreMoviesUrl(API_KEY, apiMoviesPage));
         setState({
           ...movieListState,
           moviesArray: moviesArray.concat(res.results),

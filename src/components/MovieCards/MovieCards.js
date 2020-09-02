@@ -17,7 +17,7 @@ const MovieCards = ({ movie }) => {
     release_date,
     original_language,
   } = movie;
-  const { container,titleClass, year, language, link } = classes;
+  const { container,movieTitle, year, language, link } = classes;
   const imageUrl = IMAGE_PATH + poster_path;
 
   return (
@@ -25,7 +25,7 @@ const MovieCards = ({ movie }) => {
       <div key={id} className={container}>
         <Image imageUrl={imageUrl} />
         <Rating voteAverage={vote_average} />
-        <p className={titleClass}>
+        <p className={movieTitle}>
           <strong>{title}</strong>
         </p>
         <p className={year}>

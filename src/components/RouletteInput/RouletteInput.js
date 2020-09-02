@@ -13,10 +13,9 @@ const RouletteInput = (props) => {
   const { input } = classes;
 
   return genreNames.map((genre, i) => (
-    <div key={genre}>
-      <label>
+    <div className={input} key={genre}>
+      <label >
         <input
-          className={input}
           type="radio"
           id={genreId[i]}
           name="genre"

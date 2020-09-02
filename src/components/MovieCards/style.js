@@ -26,7 +26,7 @@ const useStyles = createUseStyles({
       width: "99%",
     },
   },
-  titleClass: {
+  movieTitle: {
     position: "relative",
     bottom: "30%",
     paddingBottom: "5px",

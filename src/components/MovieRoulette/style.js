@@ -8,7 +8,7 @@ const useStyles = createUseStyles({
   },
   button: {
     transition: "0.3s",
-    marginLeft: 130,
+    marginLeft: 0,
     marginTop: 30,
     color: "white",
     fontSize: "2.5em",

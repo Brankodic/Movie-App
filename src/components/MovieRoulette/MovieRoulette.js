@@ -3,15 +3,13 @@ import { FaDiceD20 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import * as constants from "../../../constants";
-import { getData } from "../../services/api";
+import { getData, getRandomMovieUrl } from "../../services/api";
 import useStyles from "./style";
 
-import { RouletteInput } from "../"
-
+import { RouletteInput } from "../";
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;
 const ALERT_MESSAGE = "Please choose a genre";
-const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; 
 
 const MovieRoulette = () => {
   const [roulette, setState] = useState({
@@ -27,7 +25,7 @@ const MovieRoulette = () => {
   useEffect(() => {
     if (isMounted.current)
       (async () => {
-        const res = await getData(`${GET_RANDOM_URL}${genre}`);
+        const res = await getData(getRandomMovieUrl(API_KEY, genre));
         setState({
           ...roulette,
           movieId: res.results[Math.floor(Math.random() * 20)].id,
@@ -49,10 +47,7 @@ const MovieRoulette = () => {
           <FaDiceD20 className={button}></FaDiceD20>
         </Link>
       ) : (
-        <FaDiceD20
-          onClick={() => alert(ALERT_MESSAGE)}
-          className={button}
-        />
+        <FaDiceD20 onClick={() => alert(ALERT_MESSAGE)} className={button} />
       )}
     </div>
   );

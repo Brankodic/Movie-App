@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { getData } from "../../services/api";
+import { getData, getSingleMovieUrl } from "../../services/api";
 import * as constants from "../../../constants";
 import useStyles from "./style";
 
-import { ButtonBack , StarRating } from "../../components"
+import { ButtonBack, StarRating } from "../../components";
 
-const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
+const { API_KEY, IMAGE_PATH } = constants;
 
 const SingleMoviePage = () => {
   const [state, setState] = useState({
@@ -24,7 +24,7 @@ const SingleMoviePage = () => {
   useEffect(() => {
     (async () => {
       const res = await getData(
-        `${API_URL_MAIN}${movieUrl.pathname.slice(19)}?api_key=${API_KEY}`
+        getSingleMovieUrl(API_KEY, movieUrl.pathname.slice(19))
       );
       setState({
         ...state,
