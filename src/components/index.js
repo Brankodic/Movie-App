@@ -5,6 +5,7 @@ export { default as ButtonRoulette } from "./ButtonRoulette/ButtonRoulette";
 export { default as Header } from "./Header/Header";
 export { default as Modal } from "./Modal/Modal";
 export { default as Backdrop } from "./ModalBackdrop/Backdrop";
+export { default as Image} from "./MovieCardImage/Image";
 export { default as MovieCards } from "./MovieCards/MovieCards";
 export { default as MovieRoulette } from "./MovieRoulette/MovieRoulette";
 export { default as RouletteInput } from "./RouletteInput/RouletteInput";
