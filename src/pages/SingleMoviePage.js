@@ -8,7 +8,6 @@ import BackButton from "../components/BackButton/BackButton";
 import StarRating from "../components/StarRating/StarRating";
 
 const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
-const SINGLE_MOVIE_TEXT = ["Rating : ", "Popularity : ", "Language : "];
 
 const useStyles = createUseStyles({
   div: {
@@ -129,15 +128,15 @@ const SingleMoviePage = () => {
         <p className={overviewClass}>{overview}</p>
         <div className={text}>
           <p>
-            <strong>{SINGLE_MOVIE_TEXT[0]}</strong>
+            <strong>Average Rating : </strong>
             {vote_average}
           </p>
           <p>
-            <strong>{SINGLE_MOVIE_TEXT[1]}</strong>
+            <strong>Popularity : </strong>
             {popularity}
           </p>
           <p>
-            <strong>{SINGLE_MOVIE_TEXT[2]}</strong>
+            <strong>Language : </strong>
             {original_language}
           </p>
         </div>

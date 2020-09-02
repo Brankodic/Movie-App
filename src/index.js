@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import { HashRouter as Router, Route,} from "react-router-dom";
 
-import { AuthProvider } from "./services/AuthContextProvider";
+import { ContextProvider } from "./services/context";
 import Auth from "./components/Auth/Auth";
 import Header from "./components/Header/Header";
 import MovieListPage from "./pages/MovieListPage";
@@ -11,7 +11,7 @@ import SingleMoviePage from "./pages/SingleMoviePage";
 const App = () => {
   return (
     <Router>
-      <AuthProvider>
+      <ContextProvider>
         <Header />
         <Route exact path="/">
           <MovieListPage />
@@ -20,7 +20,7 @@ const App = () => {
           <SingleMoviePage />
         </Route>
         <Auth />
-      </AuthProvider>
+      </ContextProvider>
     </Router>
   );
 };

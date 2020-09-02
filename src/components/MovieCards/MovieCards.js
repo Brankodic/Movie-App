@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import * as constants from "../../../constants";
 
 const { IMAGE_PATH, SINGLE_MOVIE_URL } = constants;
-const LANGUAGE_TEXT = "Language : ";
 
 const useStyles = createUseStyles({
   container: {
@@ -57,7 +56,7 @@ const useStyles = createUseStyles({
     fontSize: "1.2rem",
     textShadow: "2px 2px 2px rgba(10, 10, 10, 0.6)",
     textAlign: "center",
-    color: "white", 
+    color: "white",
   },
   year: {
     position: "relative",
@@ -103,7 +102,7 @@ const MovieCards = ({ movie }) => {
       <div key={id} className={container}>
         <img className={img} src={IMAGE_PATH + poster_path} alt="movie" />
         <p className={rating}>
-          <strong>{String(vote_average)}</strong>
+          <strong>{vote_average}</strong>
         </p>
         <p className={titleClass}>
           <strong>{title}</strong>
@@ -112,10 +111,7 @@ const MovieCards = ({ movie }) => {
           <i>({release_date.slice(0, 4)})</i>
         </p>
         <p className={language}>
-          <i>
-            {LANGUAGE_TEXT}
-            {original_language}
-          </i>
+          <i>Language : {original_language}</i>
         </p>
       </div>
     </Link>

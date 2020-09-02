@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 
 import * as constants from "../../../constants";
 import { getData, postData } from "../../services/api";
-import { store } from "../../services/AuthContextProvider";
+import { store } from "../../services/context";
 
 const { API_KEY } = constants;
 const API_AUTH_URL = "https://api.themoviedb.org/3/authentication/";

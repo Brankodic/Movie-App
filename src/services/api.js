@@ -5,7 +5,7 @@ export async function getData(url) {
     .then((res) => {
       return res;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err));
 }
 
 export async function postData(url, item) {
@@ -21,5 +21,5 @@ export async function postData(url, item) {
     .then((data) => {
       return data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err));
 }

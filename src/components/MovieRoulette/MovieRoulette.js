@@ -9,8 +9,7 @@ import RouletteInput from "../RouletteInput/RouletteInput";
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;
 const ALERT_MESSAGE = "Please choose a genre";
-const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; //constants
-const ROULETTE_TEXT = "Movie roulette : ";
+const GET_RANDOM_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=`; 
 
 const useStyles = createUseStyles({
   h3: {
@@ -61,7 +60,7 @@ const MovieRoulette = () => {
 
   return (
     <div>
-      <h3 className={h3}>{ROULETTE_TEXT}</h3>
+      <h3 className={h3}>Movie Roulette : </h3>
       <RouletteInput handleGenre={handleGenre} genre={genre} />
       {movieId > 0 ? (
         <Link to={`${SINGLE_MOVIE_URL}${movieId}`}>

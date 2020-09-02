@@ -1,22 +1,22 @@
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useReducer } from "react";
 
 let authState = undefined;
 const store = createContext(authState);
 const { Provider } = store;
 
-const AuthProvider = ( { children } ) => {
+const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
-    switch(action.type) {
-      case 'log in':
-         authState = true;
+    switch (action.type) {
+      case "log in":
+        authState = true;
         return authState;
-        case 'log out':
+      case "log out":
         authState = false;
-          return authState;
+        return authState;
     }
   }, authState);
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
-export { store , AuthProvider }
+export { store, ContextProvider };

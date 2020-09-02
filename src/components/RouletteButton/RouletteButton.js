@@ -1,8 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-const ROULETTE_BUTTON_TEXT = "Roulette";
-
 const useStyles = createUseStyles({
   roulette: {
     position: "fixed",
@@ -38,8 +36,8 @@ const RouletteButton = (props) => {
   const { roulette } = classes;
 
   return (
-    <button className={roulette} onClick={() => openModal()}>
-      {ROULETTE_BUTTON_TEXT}
+    <button className={roulette} onClick={openModal}>
+      Roulette
     </button>
   );
 };
