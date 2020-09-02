@@ -50,7 +50,7 @@ const StarRating = () => {
   }, [authStatus]);
 
   const handlerClicked = (value) => {
-    if (authStatus === true) {
+    if (authStatus) {
       (async () => {
         await postData(getPostRatingUrl(API_KEY, movieId, sessionId), {
           value: value,
@@ -64,37 +64,38 @@ const StarRating = () => {
   const handlerHover = (value) => {
     setState({ ...state, ratingHover: value });
   };
-
-  return (
-    <div className={container}>
-      <p>
-        <strong>User Rating : </strong>
-      </p>
-      {[...Array(10)].map((n, i) => {
-        const ratingValue = i + 1;
-        return (
-          <label key={i}>
-            <input
-              className={input}
-              type="radio"
-              name="rating"
-              value={ratingValue}
-              onClick={() => handlerClicked(ratingValue)}
-            />
-            <FaStar
-              className={star}
-              color={
-                ratingValue <= (ratingHover || rate) ? "#ff1a1a" : "#e4e5e9"
-              }
-              size={20}
-              onMouseEnter={() => handlerHover(ratingValue)}
-              onMouseLeave={() => handlerHover(null)}
-            />
-          </label>
-        );
-      })}
-    </div>
-  );
+  if (authStatus)
+    return (
+      <div className={container}>
+        <p>
+          <strong>User Rating : </strong>
+        </p>
+        {[...Array(10)].map((n, i) => {
+          const ratingValue = i + 1;
+          return (
+            <label key={i}>
+              <input
+                className={input}
+                type="radio"
+                name="rating"
+                value={ratingValue}
+                onClick={() => handlerClicked(ratingValue)}
+              />
+              <FaStar
+                className={star}
+                color={
+                  ratingValue <= (ratingHover || rate) ? "#ff1a1a" : "#e4e5e9"
+                }
+                size={20}
+                onMouseEnter={() => handlerHover(ratingValue)}
+                onMouseLeave={() => handlerHover(null)}
+              />
+            </label>
+          );
+        })}
+      </div>
+    );
+  return <p>Please Login To Rate</p>;
 };
 
 export default StarRating;
