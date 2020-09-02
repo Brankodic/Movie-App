@@ -8,7 +8,7 @@ export async function getData(url) {
     .catch((err) => console.log(err));
 }
 
-export async function postData(url,item) {
+export async function postData(url, item) {
   let res = await fetch(url, {
     method: "POST",
     headers: {

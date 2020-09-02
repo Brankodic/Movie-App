@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 
-import * as constants from "../services/constants";
+import * as constants from "../../constants";
 import { getData } from "../services/api";
-import LoadMoreButton from "../components/Buttons/LoadMoreButton/LoadMoreButton";
+import LoadMoreButton from "../components/LoadMoreButton/LoadMoreButton";
 import Modal from "../components/Modal/Modal";
 import MovieCards from "../components/MovieCards/MovieCards";
 
@@ -21,12 +21,6 @@ const useStyles = createUseStyles({
     margin: "0 auto",
     marginBottom: "8em",
     marginTop: "4em",
-    "@media (max-width: 1250px)": {
-      gridTemplateColumns: "auto auto",
-    },
-    "@media (max-width: 640px)": {
-      gridTemplateColumns: "auto",
-    },
   },
 });
 
@@ -84,6 +78,7 @@ const MovieListPage = () => {
         {moviesArray.slice(0, movieSliceValue).map((movie) => (
           <MovieCards key={movie.id} movie={movie} />
         ))}
+        ;
       </div>
       <Modal />
       <LoadMoreButton load={handleLoadMore} />

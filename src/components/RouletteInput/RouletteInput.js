@@ -8,9 +8,8 @@ const GENRE_VALUE = {
 
 const useStyles = createUseStyles({
   input: {
-    textAlign: "left",
-    marginLeft: 110,
-    marginTop: 5,
+    marginLeft: 115,
+    marginTop: 7,
   },
 });
 
@@ -21,9 +20,10 @@ const RouletteInput = (props) => {
   const { input } = classes;
 
   return genreNames.map((genre, i) => (
-    <div className={input} key={genre}>
+    <div key={genre}>
       <label>
         <input
+          className={input}
           type="radio"
           id={genreId[i]}
           name="genre"
