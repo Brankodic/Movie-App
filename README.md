@@ -8,19 +8,19 @@ App is deployed and live on  https://brankodic-movie-app.vercel.app/#/
 To install the app on your pc follow next steps:
 
 1. Clone repository
-    $ git clone https://github.com/Brankodic/Movie-App.git
+ -  $ git clone https://github.com/Brankodic/Movie-App.git
 
 2. Install dependencies via terminal using:  
-    $ npm install
+ -   $ npm install
     
 3. Create a  .env  file in the root folder and use your own APY_KEY that you can get on the movie database https://www.themoviedb.org/  
-    (use .env_sample as an example)
+ -  (use .env_sample as an example)
 
 4. For authentication to work properly change REDIRECT_AUTH_URL in constants.js folder(root) to your preffered port adress
-    ( default is http://localhost:8080/#/approved ) 
+ -   ( default is http://localhost:8080/#/approved ) 
 
 5. To run your dev server , in terminal write : 
-    $ npm run dev
+ -   $ npm run dev
 
 ---
 
