@@ -16,10 +16,10 @@ To install the app on your pc follow next steps:
 3. Create a  .env  file in the root folder and use your own APY_KEY that you can get on the movie database https://www.themoviedb.org/  
  -  (use .env_sample as an example)
 
-4. For authentication to work properly change REDIRECT_AUTH_URL in constants.js folder(root) to your preffered port adress
+4. For authentication to work properly change REDIRECT_AUTH_URL in constants.js file(root) to your preffered port adress
  -   ( default is http://localhost:8080/#/approved ) 
 
-5. To run your dev server , in terminal write : 
+5. To run your dev server  : 
  -   $ npm run dev
 
 ---
