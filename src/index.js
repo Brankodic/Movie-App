@@ -5,8 +5,8 @@ import { HashRouter as Router, Route,} from "react-router-dom";
 import { ContextProvider } from "./services/context";
 import Auth from "./components/Auth/Auth";
 import Header from "./components/Header/Header";
-import MovieListPage from "./pages/MovieListPage";
-import SingleMoviePage from "./pages/SingleMoviePage";
+import MovieListPage from "./pages/MovieListPage/MovieListPage";
+import SingleMoviePage from "./pages/SingleMoviePage/SingleMoviePage";
 
 const App = () => {
   return (

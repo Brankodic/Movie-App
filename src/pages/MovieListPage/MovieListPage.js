@@ -1,28 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { createUseStyles } from "react-jss";
 
-import * as constants from "../../constants";
-import { getData } from "../services/api";
-import LoadMoreButton from "../components/LoadMoreButton/LoadMoreButton";
-import Modal from "../components/Modal/Modal";
-import MovieCards from "../components/MovieCards/MovieCards";
+import * as constants from "../../../constants";
+import { getData } from "../../services/api";
+import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
+import Modal from "../../components/Modal/Modal";
+import MovieCards from "../../components/MovieCards/MovieCards";
+import useStyles from "./style";
 
 const { API_KEY, API_URL_MAIN } = constants;
 const GET_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=1`;
 const GET_MORE_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=`;
-
-const useStyles = createUseStyles({
-  movies: {
-    display: "grid",
-    gridTemplateColumns: "auto auto auto",
-    gridGap: "4rem",
-    width: "85%",
-    alignContent: "space-around",
-    margin: "0 auto",
-    marginBottom: "8em",
-    marginTop: "4em",
-  },
-});
 
 const MovieListPage = () => {
   const [movieListState, setState] = useState({
@@ -78,7 +65,6 @@ const MovieListPage = () => {
         {moviesArray.slice(0, movieSliceValue).map((movie) => (
           <MovieCards key={movie.id} movie={movie} />
         ))}
-        ;
       </div>
       <Modal />
       <LoadMoreButton load={handleLoadMore} />

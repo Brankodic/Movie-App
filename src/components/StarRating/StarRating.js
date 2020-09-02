@@ -1,31 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import { createUseStyles } from "react-jss";
 import { FaStar } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
 import * as constants from "../../../constants";
 import { getData, postData } from "../../services/api";
 import { store } from "../../services/context";
+import useStyles from "./style";
 
 const { API_KEY, API_URL_MAIN } = constants;
-
-const useStyles = createUseStyles({
-  container: {
-    position: "relative",
-    width: "50%",
-    margin: "auto",
-    textAlign: "center",
-  },
-  input: {
-    display: "none",
-  },
-  star: {
-    transition: "color 200ms",
-    border: 2,
-    cursor: "pointer",
-  },
-});
 
 const StarRating = () => {
   const [state, setState] = useState({
