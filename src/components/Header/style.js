@@ -15,6 +15,15 @@ const useStyles = createUseStyles({
     textAlign: "center",
     fontSize: 30,
     letterSpacing: 30,
+    "@media (max-width: 1024px)": {
+      padding: 13,
+      fontSize: 20,
+      letterSpacing: 15,
+    },
+    "@media (max-width: 640px)": {
+      fontSize: 15,
+      letterSpacing: 10,
+    },
   },
   img: {
     position: "absolute",
@@ -25,6 +34,12 @@ const useStyles = createUseStyles({
     height: 50,
     padding: 0,
     margin: 0,
+    "@media (max-width: 1024px)": {
+      top: 3,
+      left: 10,
+      width: 40,
+      height: 40,
+    },
   },
 });
 

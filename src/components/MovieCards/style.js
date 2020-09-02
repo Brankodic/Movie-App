@@ -19,12 +19,12 @@ const useStyles = createUseStyles({
       boxShadow: "4px 4px 5px rgba(0, 0, 0, 0.6)",
       cursor: "pointer",
     },
-  },
-  img: {
-    boxShadow: "1px 1px 1px rgba(56, 48, 48, 0.6)",
-    height: "calc(100% - 6.8rem)",
-    width: "100%",
-    objectFit: "cover",
+    "@media (max-width: 1024px)": {
+      width: 380,
+    },
+    "@media (max-width: 640px)": {
+      width: "99%",
+    },
   },
   rating: {
     position: "relative",
@@ -42,6 +42,9 @@ const useStyles = createUseStyles({
     textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
     fontSize: "1rem",
     color: "rgb(255, 250, 250)",
+    "@media (max-width: 640px)": {
+      left: "90%",
+    },
   },
   titleClass: {
     position: "relative",

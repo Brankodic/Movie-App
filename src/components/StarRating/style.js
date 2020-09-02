@@ -14,6 +14,9 @@ const useStyles = createUseStyles({
     transition: "color 200ms",
     border: 2,
     cursor: "pointer",
+    "@media (max-width: 640px)": {
+      width: 15,
+    },
   },
 });
 

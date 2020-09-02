@@ -65,6 +65,63 @@ const useStyles = createUseStyles({
       fontSize: "1rem",
     },
   },
+  "@media (max-width: 515px)": {
+    div: {
+      width: "98%",
+    },
+    movieOverview: {
+      borderTopRightRadius: "50%",
+      borderBottomRightRadius: "50%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      top: "45%",
+      height: "2%",
+      width: "3%",
+      "&:hover": {
+        borderTopRightRadius: "0%",
+        borderBottomRightRadius: "0%",
+        top: "10%",
+        width: "90%",
+      },
+    },
+    text: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      top: "-0.2%",
+      width: "90%",
+      height: "2%",
+      "&:hover": {
+        height: "20%",
+        width: "90%",
+      },
+    },
+  },
+  "@media (max-width: 400px)": {
+    overviewClass: {
+      "&:hover": {
+        width: "89%",
+        height: "60%",
+      },
+    },
+    text: {
+      width: "89%",
+      "&:hover": {
+        height: 150,
+        width: "89%",
+      },
+    },
+  },
+  "@media (max-width: 350px)": {
+    overviewClass: {
+      "&:hover": {
+        width: "87%",
+      },
+    },
+    text: {
+      width: "87%",
+      "&:hover": {
+        width: "87%",
+      },
+    },
+  },
   "@keyframes glowing": {
     "0%": {
       boxShadow: "0 0 -10px #64acbe",
