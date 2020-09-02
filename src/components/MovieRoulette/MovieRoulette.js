@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 
 import * as constants from "../../../constants";
 import { getData } from "../../services/api";
-import RouletteInput from "../RouletteInput/RouletteInput";
 import useStyles from "./style";
+
+import { RouletteInput } from "../"
+
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;
 const ALERT_MESSAGE = "Please choose a genre";

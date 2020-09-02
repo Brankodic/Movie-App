@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
-import Backdrop from "../BackdropModal/Backdrop";
-import RouletteButton from "../RouletteButton/RouletteButton";
-import MovieRoulette from "../MovieRoulette/MovieRoulette";
 import useStyles from "./style";
+
+import { Backdrop, ButtonRoulette,MovieRoulette } from "../"
+
 
 const Modal = () => {
   const [state, setState] = useState(false);
@@ -16,7 +15,7 @@ const Modal = () => {
       <div className={state ? modal : modalFalse}>
         <MovieRoulette />
       </div>
-      <RouletteButton openModal={() => setState(true)} />
+      <ButtonRoulette openModal={() => setState(true)} />
     </div>
   );
 };

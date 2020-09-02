@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from "./style";
 
-const LoadMoreButton = (props) => {
+const ButtonLoadMore = (props) => {
   const { load } = props;
   const classes = useStyles();
   const { loadButton } = classes;
@@ -13,4 +13,4 @@ const LoadMoreButton = (props) => {
   );
 };
 
-export default LoadMoreButton;
+export default ButtonLoadMore;
