@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import * as constants from "../../../constants";
 import { getData } from "../../services/api";
-import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
-import Modal from "../../components/Modal/Modal";
-import MovieCards from "../../components/MovieCards/MovieCards";
 import useStyles from "./style";
+
+import { ButtonLoadMore, Modal, MovieCards} from "../../components"
 
 const { API_KEY, API_URL_MAIN } = constants;
 const GET_MOVIES_URL = `${API_URL_MAIN}popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -67,7 +66,7 @@ const MovieListPage = () => {
         ))}
       </div>
       <Modal />
-      <LoadMoreButton load={handleLoadMore} />
+      <ButtonLoadMore load={handleLoadMore} />
     </>
   );
 };

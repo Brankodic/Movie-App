@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 
 import { getData } from "../../services/api";
 import * as constants from "../../../constants";
-import BackButton from "../../components/BackButton/BackButton";
-import StarRating from "../../components/StarRating/StarRating";
 import useStyles from "./style";
+
+import { ButtonBack , StarRating } from "../../components"
 
 const { API_KEY, IMAGE_PATH, API_URL_MAIN } = constants;
 
@@ -54,7 +54,7 @@ const SingleMoviePage = () => {
           </p>
         </div>
       </div>
-      <BackButton />
+      <ButtonBack />
       <StarRating movieId={id} />
     </>
   );

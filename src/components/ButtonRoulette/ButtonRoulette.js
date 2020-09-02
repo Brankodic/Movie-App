@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from "./style";
 
-const RouletteButton = (props) => {
+const ButtonRoulette = (props) => {
   const { openModal } = props;
   const classes = useStyles();
   const { roulette } = classes;
@@ -13,4 +13,4 @@ const RouletteButton = (props) => {
   );
 };
 
-export default RouletteButton;
+export default ButtonRoulette;

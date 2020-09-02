@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useStyles from "./style"
 
-const BackButton = () => {
+const ButtonBack = () => {
   const classes = useStyles();
   const { back } = classes;
 
@@ -13,4 +13,4 @@ const BackButton = () => {
   );
 };
 
-export default BackButton;
+export default ButtonBack;
