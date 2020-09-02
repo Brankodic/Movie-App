@@ -5,7 +5,7 @@ App is deployed and live on  https://brankodic-movie-app.vercel.app/#/
 
 ---
 
-To install the app on your pc follow next steps:
+To run the app locally, do the following (steps):
 
 1. Clone repository
  -  $ git clone https://github.com/Brankodic/Movie-App.git
