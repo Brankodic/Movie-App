@@ -1,18 +1,10 @@
 import React from "react";
-import { createUseStyles } from "react-jss";
+import useStyles from "./style";
 
 const GENRE_VALUE = {
   genreNames: ["comedy", "action", "thriller", "horror", "fantasy", "romance"],
   genreId: [35, 28, 53, 27, 14, 10749],
 };
-
-const useStyles = createUseStyles({
-  input: {
-    textAlign: "left",
-    marginLeft: 110,
-    marginTop: 5,
-  },
-});
 
 const RouletteInput = (props) => {
   const handleGenre = props.handleGenre;
@@ -22,7 +14,7 @@ const RouletteInput = (props) => {
 
   return genreNames.map((genre, i) => (
     <div className={input} key={genre}>
-      <label>
+      <label >
         <input
           type="radio"
           id={genreId[i]}

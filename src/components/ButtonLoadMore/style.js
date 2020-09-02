@@ -1,24 +1,21 @@
-import React from "react";
 import { createUseStyles } from "react-jss";
-
-const LOAD_BUTTON_TEXT = "Load More";
 
 const useStyles = createUseStyles({
   loadButton: {
-    fontFamily: '"Alegreya Sans SC", sans-serif',
     position: "fixed",
-    border: "3px solid rgb(255, 255, 255)",
     left: "48%",
     bottom: "2%",
+    transition: "0.2s",
+    backfaceVisibility: "hidden",
+    boxShadow: "2px 2px 3px rgba(0, 0, 0, 0.6)",
+    border: "3px solid rgb(255, 255, 255)",
+    borderRadius: "50%",
     height: 60,
     width: 60,
-    borderRadius: "50%",
-    boxShadow: "2px 2px 3px rgba(0, 0, 0, 0.6)",
     background: "linear-gradient(to top left, #006064  0%, #5DC8CD 100%)",
-    transition: "0.2s",
+    fontFamily: '"Alegreya Sans SC", sans-serif',
     color: "white",
     textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
-    backfaceVisibility: "hidden",
     "&:hover": {
       transition: "1s",
       transform: "scale(1.02)",
@@ -37,16 +34,4 @@ const useStyles = createUseStyles({
   },
 });
 
-const LoadMoreButton = (props) => {
-  const load = props.load;
-  const classes = useStyles();
-  const { loadButton } = classes;
-
-  return (
-    <button className={loadButton} onClick={load}>
-      {LOAD_BUTTON_TEXT}
-    </button>
-  );
-};
-
-export default LoadMoreButton;
+export default useStyles;

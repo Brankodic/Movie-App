@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack --mode=development",
     "build": "webpack --mode=production",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "eslint": "^7.8.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"

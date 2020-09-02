@@ -1,101 +1,11 @@
 import React from "react";
-import { createUseStyles } from "react-jss";
 import { Link } from "react-router-dom";
 
-import * as constants from "../../services/constants";
+import * as constants from "../../../constants";
+import { Image, Rating } from "../";
+import useStyles from "./style";
 
 const { IMAGE_PATH, SINGLE_MOVIE_URL } = constants;
-const LANGUAGE_TEXT = "Language : ";
-
-const useStyles = createUseStyles({
-  container: {
-    boxSizing: "border-box",
-    alignSelf: "center",
-    padding: 0,
-    margin: "auto",
-    width: 400,
-    height: 350,
-    boxShadow: "2px 2px 3px rgba(0, 0, 0, 0.6)",
-    borderBottomRightRadius: 50,
-    justifyContent: "center",
-    background: "linear-gradient(to top left, #006064  0%, #5DC8CD 100%)",
-    transition: "1s",
-    "&:hover": {
-      transition: "1s",
-      transform: "scale(1.02)",
-      boxShadow: "4px 4px 5px rgba(0, 0, 0, 0.6)",
-      cursor: "pointer",
-    },
-    "@media (max-width: 1024px)": {
-      width: 380,
-    },
-    "@media (max-width: 640px)": {
-      width: "99%",
-    },
-  },
-  img: {
-    height: "calc(100% - 6.8rem)",
-    boxShadow: "1px 1px 1px rgba(56, 48, 48, 0.6)",
-    width: "100%",
-    objectFit: "cover",
-  },
-  rating: {
-    lineHeight: "150%",
-    position: "relative",
-    height: "25px",
-    width: "25px",
-    boxShadow: "2px 2px 2px rgba(56, 48, 48, 0.6)",
-    textAlign: "center",
-    color: "rgb(255, 250, 250)",
-    textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
-    fontSize: "1rem",
-    padding: "1em",
-    borderRadius: "50%",
-    left: "93%",
-    bottom: "83%",
-    border: "3px solid rgb(255, 255, 255)",
-    background: "linear-gradient(135deg, #FF3500, #A62300)","@media (max-width: 1024px)": {
-      left: "92%",
-    },
-    "@media (max-width: 640px)": {
-      left: "90%",
-    },
-  },
-  titleClass: {
-    color: "white",
-    fontSize: "1.2rem",
-    textShadow: "2px 2px 2px rgba(10, 10, 10, 0.6)",
-    textAlign: "center",
-    paddingBottom: "5px",
-    position: "relative",
-    bottom: "30%",
-  },
-  year: {
-    color: "rgb(255, 250, 250)",
-    textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
-    fontSize: "0.95rem",
-    textAlign: "center",
-    padding: 5,
-    lineHeight: "50%",
-    overflow: "hidden",
-    position: "relative",
-    bottom: "30%",
-  },
-  language: {
-    color: "rgb(255, 250, 250)",
-    textShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
-    fontSize: "0.95rem",
-    textAlign: "center",
-    padding: 5,
-    lineHeight: "50%",
-    overflow: "hidden",
-    position: "relative",
-    bottom: "35%",
-  },
-  link: {
-    textDecoration: "none",
-  },
-});
 
 const MovieCards = ({ movie }) => {
   const classes = useStyles();
@@ -107,26 +17,22 @@ const MovieCards = ({ movie }) => {
     release_date,
     original_language,
   } = movie;
-  const { container, img, rating, titleClass, year, language, link } = classes;
+  const { container,movieTitle, year, language, link } = classes;
+  const imageUrl = IMAGE_PATH + poster_path;
 
   return (
     <Link className={link} to={`${SINGLE_MOVIE_URL}${id}`}>
       <div key={id} className={container}>
-        <img className={img} src={IMAGE_PATH + poster_path} alt="movie" />
-        <p className={rating}>
-          <strong>{String(vote_average)}</strong>
-        </p>
-        <p className={titleClass}>
+        <Image imageUrl={imageUrl} />
+        <Rating voteAverage={vote_average} />
+        <p className={movieTitle}>
           <strong>{title}</strong>
         </p>
         <p className={year}>
           <i>({release_date.slice(0, 4)})</i>
         </p>
         <p className={language}>
-          <i>
-            {LANGUAGE_TEXT}
-            {original_language}
-          </i>
+          <i>Language : {original_language}</i>
         </p>
       </div>
     </Link>

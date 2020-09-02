@@ -1,17 +1,15 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { HashRouter as Router, Route, Redirect } from "react-router-dom";
+import { HashRouter as Router, Route,} from "react-router-dom";
 
-import { AuthProvider } from "./services/AuthContextProvider";
-import Auth from "./services/Auth";
-import Header from "./components/Header/Header";
-import MovieListPage from "./pages/MovieListPage";
-import SingleMoviePage from "./pages/SingleMoviePage";
+import { ContextProvider } from "./services/context";
+import {Auth,Header} from "./components"
+import { MovieListPage, SingleMoviePage } from "./pages"
 
 const App = () => {
   return (
     <Router>
-      <AuthProvider >
+      <ContextProvider>
         <Header />
         <Route exact path="/">
           <MovieListPage />
@@ -20,7 +18,7 @@ const App = () => {
           <SingleMoviePage />
         </Route>
         <Auth />
-      </AuthProvider>
+      </ContextProvider>
     </Router>
   );
 };
