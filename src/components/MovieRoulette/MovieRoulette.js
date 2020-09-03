@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import * as constants from "../../../constants";
 import { getData, getRandomMovieUrl } from "../../services/api";
 import useStyles from "./style";
-
 import { RouletteInput } from "../";
 
 const { API_KEY, SINGLE_MOVIE_URL } = constants;

@@ -54,7 +54,7 @@ const Auth = () => {
 
   const handleLogin = () => {
     (async () => {
-      const res = await getData(getTokenUrl(API_KEY)); 
+      const res = await getData(getTokenUrl(API_KEY));
       Cookies.set("request_token", `${res.request_token}`);
       window.location = `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=${REDIRECT_AUTH_URL}`;
     })();

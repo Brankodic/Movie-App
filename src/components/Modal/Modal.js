@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import useStyles from "./style";
 
-import { Backdrop, ButtonRoulette,MovieRoulette } from "../"
-
+import { Backdrop, ButtonRoulette, MovieRoulette } from "../";
 
 const Modal = () => {
   const [state, setState] = useState(false);

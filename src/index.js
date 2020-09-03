@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { HashRouter as Router, Route,} from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 
 import { ContextProvider } from "./services/context";
-import {Auth,Header} from "./components"
-import { MovieListPage, SingleMoviePage } from "./pages"
+import { Auth, Header } from "./components";
+import { MovieListPage, SingleMoviePage } from "./pages";
 
 const App = () => {
   return (

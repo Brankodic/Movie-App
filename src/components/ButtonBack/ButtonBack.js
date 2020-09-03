@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useStyles from "./style"
+import useStyles from "./style";
 
 const ButtonBack = () => {
   const classes = useStyles();
