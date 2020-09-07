@@ -3,6 +3,7 @@ export { default as ButtonBack } from "./ButtonBack/ButtonBack";
 export { default as ButtonLoadMore } from "./ButtonLoadMore/ButtonLoadMore";
 export { default as ButtonRoulette } from "./ButtonRoulette/ButtonRoulette";
 export { default as Header } from "./Header/Header";
+export { default as LoadedMovies } from "./LoadedMovies/LoadedMovies";
 export { default as Modal } from "./Modal/Modal";
 export { default as Backdrop } from "./ModalBackdrop/Backdrop";
 export { default as Image } from "./MovieCardImage/Image";

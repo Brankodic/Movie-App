@@ -4,7 +4,11 @@ import * as constants from "../../../constants";
 import { getData, getMoreMoviesUrl, getMovieListUrl } from "../../services/api";
 import useStyles from "./style";
 
-import { ButtonLoadMore, Modal, MovieCards } from "../../components";
+import {
+  ButtonLoadMore,
+  Modal,
+  LoadedMovies,
+} from "../../components";
 
 const { API_KEY } = constants;
 
@@ -58,9 +62,7 @@ const MovieListPage = () => {
   return (
     <>
       <div className={movies}>
-        {moviesArray.slice(0, movieSliceValue).map((movie) => (
-          <MovieCards key={movie.id} movie={movie} />
-        ))}
+        <LoadedMovies moviesArray={moviesArray} movieSliceValue={movieSliceValue} />
       </div>
       <Modal />
       <ButtonLoadMore load={handleLoadMore} />
