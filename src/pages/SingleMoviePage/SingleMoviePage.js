@@ -15,11 +15,12 @@ const SingleMoviePage = () => {
     image: undefined,
     movieUrl: useLocation(),
   });
-
   const { movie, image, movieUrl } = state;
+  const { id, overview, vote_average, popularity, original_language } = movie;
+
   const classes = useStyles();
   const { div, img, movieOverview, text } = classes;
-  const { id, overview, vote_average, popularity, original_language } = movie;
+
 
   useEffect(() => {
     (async () => {

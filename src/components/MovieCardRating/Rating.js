@@ -2,9 +2,10 @@ import React from "react";
 import useStyles from "./style";
 
 const Rating = (props) => {
+  const { voteAverage } = props;
+
   const classes = useStyles();
   const { rating } = classes;
-  const { voteAverage } = props;
 
   return (
     <p className={rating}>

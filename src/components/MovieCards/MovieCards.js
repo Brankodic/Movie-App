@@ -6,9 +6,11 @@ import { Image, Rating } from "../";
 import useStyles from "./style";
 
 const { IMAGE_PATH, SINGLE_MOVIE_URL } = constants;
+const generateMovieUrl = (id) => {
+  return `${SINGLE_MOVIE_URL}${id}`;
+};
 
 const MovieCards = ({ movie }) => {
-  const classes = useStyles();
   const {
     id,
     poster_path,
@@ -17,11 +19,13 @@ const MovieCards = ({ movie }) => {
     release_date,
     original_language,
   } = movie;
-  const { container, movieTitle, year, language, link } = classes;
   const imageUrl = IMAGE_PATH + poster_path;
 
+  const classes = useStyles();
+  const { container, movieTitle, year, language, link } = classes;
+
   return (
-    <Link className={link} to={`${SINGLE_MOVIE_URL}${id}`}>
+    <Link className={link} to={generateMovieUrl(id)}>
       <div key={id} className={container}>
         <Image imageUrl={imageUrl} />
         <Rating voteAverage={vote_average} />

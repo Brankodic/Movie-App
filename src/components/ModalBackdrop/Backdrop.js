@@ -2,11 +2,14 @@ import React from "react";
 import useStyles from "./style";
 
 const Backdrop = (props) => {
-  const classes = useStyles();
-  const { backdrop } = classes;
   const { modal, closeModal } = props;
 
-  return modal ? <div className={backdrop} onClick={closeModal}></div> : null;
+  const classes = useStyles();
+  const { backdrop } = classes;
+
+  return (
+    <>({modal && <div className={backdrop} onClick={closeModal}></div>})</>
+  );
 };
 
 export default Backdrop;

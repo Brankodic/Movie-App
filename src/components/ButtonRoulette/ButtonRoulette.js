@@ -3,6 +3,7 @@ import useStyles from "./style";
 
 const ButtonRoulette = (props) => {
   const { openModal } = props;
+  
   const classes = useStyles();
   const { roulette } = classes;
 

@@ -3,6 +3,7 @@ import useStyles from "./style";
 
 const ButtonLoadMore = (props) => {
   const { load } = props;
+  
   const classes = useStyles();
   const { loadButton } = classes;
 

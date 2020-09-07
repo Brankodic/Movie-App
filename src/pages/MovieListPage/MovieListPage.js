@@ -15,7 +15,6 @@ const MovieListPage = () => {
     movieSliceValue: 6,
     moviesArray: [],
   });
-
   const {
     apiMoviesPage,
     loadMoreCounter,
@@ -38,7 +37,7 @@ const MovieListPage = () => {
   }, []);
 
   const handleLoadMore = () => {
-    if (loadMoreCounter % 3 == 0)
+    if (loadMoreCounter % 3 === 0)
       (async () => {
         const res = await getData(getMoreMoviesUrl(API_KEY, apiMoviesPage));
         setState({

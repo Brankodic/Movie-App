@@ -23,9 +23,9 @@ const StarRating = () => {
     sessionId: Cookies.get("session_id"),
     movieId: undefined,
   });
-
-  const movieUrl = useLocation();
   const { rate, ratingHover, authStatus, sessionId, movieId } = state;
+  
+  const movieUrl = useLocation();
   const globalState = useContext(store);
   const classes = useStyles();
   const { container, input, star } = classes;

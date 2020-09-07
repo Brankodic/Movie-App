@@ -9,6 +9,7 @@ const GENRE_VALUE = {
 const RouletteInput = (props) => {
   const handleGenre = props.handleGenre;
   const { genreNames, genreId } = GENRE_VALUE;
+  
   const classes = useStyles();
   const { input } = classes;
 

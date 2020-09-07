@@ -70,14 +70,19 @@ const Auth = () => {
     });
   };
 
-  return loggedIn ? (
-    <button onClick={handleLogout} className={auth}>
-      Logout
-    </button>
-  ) : (
-    <button onClick={handleLogin} className={auth}>
-      Login
-    </button>
+  return (
+    <>
+      {loggedIn && (
+        <button onClick={handleLogout} className={auth}>
+          Logout
+        </button>
+      )}
+      {!loggedIn && (
+        <button onClick={handleLogin} className={auth}>
+          Login
+        </button>
+      )}
+    </>
   );
 };
 

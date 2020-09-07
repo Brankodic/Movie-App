@@ -5,6 +5,7 @@ import { Backdrop, ButtonRoulette, MovieRoulette } from "../";
 
 const Modal = () => {
   const [state, setState] = useState(false);
+  
   const classes = useStyles();
   const { modal, modalFalse } = classes;
 
