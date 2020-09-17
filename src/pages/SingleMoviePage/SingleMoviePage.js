@@ -12,7 +12,7 @@ const { API_KEY, IMAGE_PATH } = constants;
 const SingleMoviePage = () => {
   const [state, setState] = useState({
     movie: {},
-    image: undefined,
+    image: '',
     movieUrl: useLocation(),
   });
   const { movie, image, movieUrl } = state;

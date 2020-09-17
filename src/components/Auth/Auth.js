@@ -17,7 +17,7 @@ const Auth = () => {
   const [state, setState] = useState({
     sessionId: Cookies.get("session_id"),
     token: Cookies.get("request_token"),
-    loggedIn: undefined,
+    loggedIn: false,
   });
 
   const { sessionId, token, loggedIn } = state;

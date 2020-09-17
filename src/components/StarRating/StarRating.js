@@ -17,11 +17,11 @@ const { API_KEY } = constants;
 
 const StarRating = () => {
   const [state, setState] = useState({
-    rate: undefined,
-    ratingHover: undefined,
-    authStatus: undefined,
+    rate: 0,
+    ratingHover: 0,
+    authStatus: false,
     sessionId: Cookies.get("session_id"),
-    movieId: undefined,
+    movieId: 0,
   });
   const { rate, ratingHover, authStatus, sessionId, movieId } = state;
   
